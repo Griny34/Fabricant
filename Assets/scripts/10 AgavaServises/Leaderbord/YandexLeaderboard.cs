@@ -57,7 +57,7 @@ public class YandexLeaderboard : MonoBehaviour
                 if(string.IsNullOrEmpty(name))
                     name = AnonymousName;
 
-                _leaderboardPlayers.Add(new LeaderboardPlayer(name, score, rank));
+                _leaderboardPlayers.Add(new LeaderboardPlayer(name, score, rank));              
             }
 
             _leaderboardView.ConstructLeaderboard(_leaderboardPlayers);

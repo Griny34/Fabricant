@@ -115,15 +115,15 @@ public class ArmchairSpawner : SpawnerFurniture
 
             OnChangeCount?.Invoke();
 
-            if (_countBoardsForCreate == _countBoard)
-            {
-                if (_coroutineAcceptFurniture != null)
-                {
-                    StopCoroutine(_coroutineAcceptFurniture);
-                }
+            //if (_countBoardsForCreate == _countBoard)
+            //{
+            //    if (_coroutineAcceptFurniture != null)
+            //    {
+            //        StopCoroutine(_coroutineAcceptFurniture);
+            //    }
 
-                _coroutineAcceptFurniture = StartCoroutine(AcceptFurniture());
-            }
+            //    _coroutineAcceptFurniture = StartCoroutine(AcceptFurniture());
+            //}
 
             if (_countBoardsForCreate == _countBoard && _countFurnitureForCreate == _countFurniture)
             {
@@ -138,6 +138,16 @@ public class ArmchairSpawner : SpawnerFurniture
             }
 
             yield return new WaitForSeconds(0.5f);
+        }
+
+        if (_countBoardsForCreate == _countBoard)
+        {
+            if (_coroutineAcceptFurniture != null)
+            {
+                StopCoroutine(_coroutineAcceptFurniture);
+            }
+
+            _coroutineAcceptFurniture = StartCoroutine(AcceptFurniture());
         }
     }
 

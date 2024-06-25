@@ -7,12 +7,13 @@ using UnityEngine.UIElements;
 public class FocusServise : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private ControlerPause _controlerPause;
 
     private float _maxValue;
 
     private void OnEnable()
     {
-        if (Agava.WebUtility.WebApplication.IsRunningOnWebGL == false)
+        if (WebApplication.IsRunningOnWebGL == false)
             return;
 
         Application.focusChanged += OnInBakgroundChangeApp;
@@ -21,43 +22,41 @@ public class FocusServise : MonoBehaviour
 
     private void OnDisable()
     {
-        if (Agava.WebUtility.WebApplication.IsRunningOnWebGL == false)
+        if (WebApplication.IsRunningOnWebGL == false)
             return;
 
         Application.focusChanged -= OnInBakgroundChangeApp;
         WebApplication.InBackgroundChangeEvent -= OnInBakgroundChangeWeb;
     }
 
-    private void OnInBakgroundChangeApp(bool app)
-    {
-        MuteAudio(!app);
-        PauseGame(!app);
-    }
+    private void OnInBakgroundChangeApp(bool inFocuse) =>
+        _controlerPause.OutOfFocuse = !inFocuse;
 
-    private void OnInBakgroundChangeWeb(bool isBackGround)
-    {
-        MuteAudio(isBackGround);
-        PauseGame(isBackGround);
-    }
+        //MuteAudio(!app);
+        //PauseGame(!app);
+    
 
-    private void MuteAudio(bool value)
-    {
-        if (PlayerPrefs.HasKey("Volume"))
-        {
-            _maxValue = PlayerPrefs.GetFloat("Volume");
+    private void OnInBakgroundChangeWeb(bool outFocuse) =>
+        _controlerPause.OutOfFocuse = outFocuse;
 
+        //MuteAudio(isBackGround);
+        //PauseGame(isBackGround);
+    
 
-        }
-        else
-        {
+    //private void MuteAudio(bool value)
+    //{
+    //    if (value)
+    //    {
+    //        _controlerPause.StopGame();
+    //    }
+    //    else
+    //    {
+    //        _controlerPause.PlayGame();
+    //    }
+    //}
 
-        }
-
-        _audioSource.volume = value ? 0 : 1;
-    }
-
-    private void PauseGame(bool value)
-    {
-        Time.timeScale = value ? 0 : 1;
-    }
+    //private void PauseGame(bool value)
+    //{
+    //    Time.timeScale = value ? 0 : 1;
+    //}
 }

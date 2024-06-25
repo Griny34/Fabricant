@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class InterstishelService : MonoBehaviour
 {
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private ControlerPause _controlerPause;
+
     private const string _keyVolume = "Volume";
 
     public void ShowInterstitial(Action onCloseCallBack)
@@ -32,21 +35,27 @@ public class InterstishelService : MonoBehaviour
 
     private void OnOpenColbek()
     {
-        Time.timeScale = 0;
-        AudioListener.volume = 0f;
+        _controlerPause.StopGame();
+        //Time.timeScale = 0;
+        //_audioSource.Pause();
+
+        //AudioListener.volume = 0f;
     }
 
     private void OnCloseColbek(bool isClosed)
     {
-        Time.timeScale = 1;      
+        _controlerPause.PlayGame();
+        //Time.timeScale = 1;
 
-        if (PlayerPrefs.HasKey(_keyVolume))
-        {
-            AudioListener.volume = PlayerPrefs.GetFloat(_keyVolume);
-        }
-        else
-        {
-            AudioListener.volume = 1f;
-        }
+        //_audioSource.Play();
+
+        //if (PlayerPrefs.HasKey(_keyVolume))
+        //{
+        //    AudioListener.volume = PlayerPrefs.GetFloat(_keyVolume);
+        //}
+        //else
+        //{
+        //    AudioListener.volume = 1f;
+        //}
     }
 }

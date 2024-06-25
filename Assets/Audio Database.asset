@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4645132edefd4c74968a0c941a98fb89, type: 3}
+  m_Name: Audio Database
+  m_EditorClassIdentifier: 
+  _items:
+  - Clip: {fileID: 8300000, guid: a72867f10e1bde743a3c0fd3c0e8178c, type: 3}
+    Key: Ceh
+    FolderPath: Audio\
+    Name: Ceh.mp3
+    Preload: 1
+    _id: dccc50ab-d445-4380-b46c-27ed90c2fd2a
+  - Clip: {fileID: 8300000, guid: a5aa15d557e87cc409008e7f3009e328, type: 3}
+    Key: Game
+    FolderPath: Audio\
+    Name: Game.mp3
+    Preload: 1
+    _id: 37b83f3b-6bcb-45d6-ac4d-6e0e74fc33eb
+  - Clip: {fileID: 8300000, guid: d026266d3a469774bb3f3a48fb3a80af, type: 3}
+    Key: Button
+    FolderPath: Audio\
+    Name: Button.mp3
+    Preload: 0
+    _id: b108df7e-69d2-4bf6-a521-d3a65a095705
+  - Clip: {fileID: 8300000, guid: 0fbd6344a13961148afaa62447f1e591, type: 3}
+    Key: niht
+    FolderPath: Audio\
+    Name: niht.mp3
+    Preload: 0
+    _id: 757128a2-9fc4-43a7-a095-36e06967dc50

@@ -5,45 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class UserInterface : MonoBehaviour
 {
-    public void PlayGame()
-    {
-        if (Tutorial.IsTiger)
-        {
-            SceneManager.LoadScene("PlayScene");
-        }
-        else
-        {
-            SceneManager.LoadScene("TutorialScene");
-        }
-    }
+    [SerializeField] private ControlerPause _controlerPause;
 
-    public void LoadStartMenu()
-    {
+    public void PlayGame() =>
+        SceneManager.LoadScene(Tutorial.IsTiger ? "PlayScene" : "TutorialeScene");
+
+    public void LoadStartMenu() =>
         SceneManager.LoadScene(0);
-    }
-
-    public void LoadMenu()
-    {
+    
+    public void LoadMenu() =>
         SceneManager.LoadScene(1);
-    }
 
-    public void ExitGame()
-    {
+    public void ExitGame() =>
         Application.Quit();
-    }
 
-    public void StopGame()
-    {
-        Time.timeScale = 0;
-    }
+    public void StopGame() =>
+        _controlerPause.IsPaused = true;
 
-    public void ResumeGame()
-    {
-        Time.timeScale = 1;
-    }
+    public void ResumeGame() =>
+        _controlerPause.IsPaused = false;
 
-    public void ClearSave()
-    {
+    public void ClearSave() =>
         PlayerPrefs.DeleteAll();
-    }
 }

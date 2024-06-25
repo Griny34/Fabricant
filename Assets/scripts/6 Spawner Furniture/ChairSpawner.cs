@@ -37,6 +37,8 @@ public class ChairSpawner : SpawnerFurniture
                 _coroutine = StartCoroutine(AcceptMaterial());
             }
 
+            
+
             if (SearchStool() != null)
             {
                 if (_coroutineAcceptFurniture != null)
@@ -107,23 +109,21 @@ public class ChairSpawner : SpawnerFurniture
         {
             _boardRelevant = SearchMateriale();
 
-            _stackMaterial.RemoveDesk(_boardRelevant, gameObject.transform);
-
-            
+            _stackMaterial.RemoveDesk(_boardRelevant, gameObject.transform);           
 
             _countBoard++;
 
             OnChangeCount?.Invoke();
 
-            if (_countBoardsForCreate == _countBoard)
-            {                
-                if(_coroutineAcceptFurniture != null)
-                {
-                    StopCoroutine(_coroutineAcceptFurniture);
-                }
+            //if (_countBoardsForCreate == _countBoard)
+            //{
+            //    if (_coroutineAcceptFurniture != null)
+            //    {
+            //        StopCoroutine(_coroutineAcceptFurniture);
+            //    }
 
-                _coroutineAcceptFurniture = StartCoroutine(AcceptFurniture());
-            }
+            //    _coroutineAcceptFurniture = StartCoroutine(AcceptFurniture());
+            //}
 
             if (_countBoardsForCreate == _countBoard && _countFurnitureForCreate == _countFurniture)
             {
@@ -138,6 +138,19 @@ public class ChairSpawner : SpawnerFurniture
             }
             yield return new WaitForSeconds(0.5f);
         }
+
+
+        if (_countBoardsForCreate == _countBoard)
+        {
+            if (_coroutineAcceptFurniture != null)
+            {
+                StopCoroutine(_coroutineAcceptFurniture);
+            }
+
+            _coroutineAcceptFurniture = StartCoroutine(AcceptFurniture());
+        }
+
+
     }
 
     protected override IEnumerator PlayAnimation()

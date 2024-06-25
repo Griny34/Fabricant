@@ -27,14 +27,15 @@ public class AudioSlider : MonoBehaviour
         }
     }
 
-    public void ChangeVolume()
+    public void ChangeVolume(Slider slider)
     {
         if(_musicPlayer != null)
         {
-            _musicPlayer.ChangeVolume(_slider.value);
+            _musicPlayer.ChangeVolume(slider.value);
         }
 
-        VolumeChanged?.Invoke(_slider.value);        
+        VolumeChanged?.Invoke(_slider.value);
+        SaveVolume(slider);
     }
 
     //private void OnDestroy()
@@ -42,8 +43,8 @@ public class AudioSlider : MonoBehaviour
     //    PlayerPrefs.SetFloat(_keyVolume, _slider.value);
     //}
 
-    public void SaveVolume()
+    public void SaveVolume(Slider slider)
     {
-        PlayerPrefs.SetFloat(_keyVolume, _slider.value);
+        PlayerPrefs.SetFloat(_keyVolume, slider.value);
     }
 }

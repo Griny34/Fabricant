@@ -8,6 +8,7 @@ public class RewardService : MonoBehaviour
 {
     [SerializeField] private TriggerHandler _triggerHandler;
     [SerializeField] private SpawnerMoney _spawnerMoney;
+    [SerializeField] private ControlerPause _controlerPause;
 
     private string _keyVolume = "Volume";
 
@@ -35,8 +36,7 @@ public class RewardService : MonoBehaviour
     private void OnOpenColbek()
     {
         _triggerHandler.gameObject.SetActive(false);
-        Time.timeScale = 0;
-        AudioListener.volume = 0f;
+        _controlerPause.StopGame();
     }
 
     private void AddMoney()
@@ -49,15 +49,6 @@ public class RewardService : MonoBehaviour
 
     private void OnCloseColbek()
     {
-        Time.timeScale = 1;
-
-        if (PlayerPrefs.HasKey(_keyVolume))
-        {
-            AudioListener.volume = PlayerPrefs.GetFloat(_keyVolume);
-        }
-        else
-        {
-            AudioListener.volume = 1f;
-        }       
+        _controlerPause.PlayGame();
     }
 }

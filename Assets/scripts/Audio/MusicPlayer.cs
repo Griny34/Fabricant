@@ -21,7 +21,7 @@ public class MusicPlayer : MonoBehaviour
 
         foreach (Sound sound in _sounds)
         {
-            sound.Source = gameObject.AddComponent<AudioSource>();
+            sound.Source = _audioSource;
             sound.Source.clip = sound.Clip;
 
             sound.Source.volume = sound.Volume * volume;

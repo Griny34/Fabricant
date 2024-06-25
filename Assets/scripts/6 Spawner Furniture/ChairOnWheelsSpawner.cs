@@ -115,15 +115,15 @@ public class ChairOnWheelsSpawner : SpawnerFurniture
 
             OnChangeCount?.Invoke();
 
-            if (_countBoardsForCreate == _countBoard)
-            {
-                if (_coroutineAcceptFurniture != null)
-                {
-                    StopCoroutine(_coroutineAcceptFurniture);
-                }
+            //if (_countBoardsForCreate == _countBoard)
+            //{
+            //    if (_coroutineAcceptFurniture != null)
+            //    {
+            //        StopCoroutine(_coroutineAcceptFurniture);
+            //    }
 
-                _coroutineAcceptFurniture = StartCoroutine(AcceptFurniture());
-            }
+            //    _coroutineAcceptFurniture = StartCoroutine(AcceptFurniture());
+            //}
 
             if (_countBoardsForCreate == _countBoard && _countFurnitureForCreate == _countFurniture)
             {
@@ -136,6 +136,16 @@ public class ChairOnWheelsSpawner : SpawnerFurniture
 
                 _coroutineAnimation = StartCoroutine(PlayAnimation());
             }
+        }
+
+        if (_countBoardsForCreate == _countBoard)
+        {
+            if (_coroutineAcceptFurniture != null)
+            {
+                StopCoroutine(_coroutineAcceptFurniture);
+            }
+
+            _coroutineAcceptFurniture = StartCoroutine(AcceptFurniture());
         }
     }
 
