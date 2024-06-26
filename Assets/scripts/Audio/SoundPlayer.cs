@@ -1,22 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+using Plugins.Audio.Core;
 using UnityEngine;
 
 public class SoundPlayer : MonoBehaviour
 {
-    [SerializeField] private AudioSource AudioSourcePlay;
-    [SerializeField] private AudioClip SoundButtonPlay;
-
-    [SerializeField] private AudioSource AudioSourceOther;
-    [SerializeField] private AudioClip SoundButtonOther;
+    [SerializeField] private SourceAudio _sourceAudio;
 
     public void ClickSoundButtonPlay()
     {
-        AudioSourcePlay.PlayOneShot(SoundButtonPlay);
+        _sourceAudio.Play("Button");
     }
 
     public void ClickSoundOther()
     {
-        AudioSourceOther.PlayOneShot(SoundButtonOther);
+        _sourceAudio.Play("niht");
     }
 }
