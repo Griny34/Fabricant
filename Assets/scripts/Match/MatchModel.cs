@@ -14,6 +14,7 @@ public class MatchModel : MonoBehaviour
     [SerializeField] private RealizationReward _realizationReward;
     [SerializeField] private YndexLeaderBoardMini _mini;
     [SerializeField] private ControlerPause _controlerPause;
+    [SerializeField] private UserInterface _userInterface;
 
     [Header("Timer")]
     [SerializeField] private Timer _gameTimer;
@@ -98,7 +99,7 @@ public class MatchModel : MonoBehaviour
 
 
         _realizationReward.OpenSpawner();
-        _controlerPause.HandlePause();
+        _userInterface.ResumeGame();
         _gameTimer.Stop();
         Initialize();
         onMatchChanged?.Invoke();
@@ -114,7 +115,7 @@ public class MatchModel : MonoBehaviour
 
     private void FinishMatch()
     {
-        _controlerPause.HandlePause();
+        _userInterface.StopGame();
 
         onFinishing?.Invoke();
 

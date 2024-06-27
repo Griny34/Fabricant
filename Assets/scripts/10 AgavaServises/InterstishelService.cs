@@ -1,3 +1,4 @@
+using Plugins.Audio.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ public class InterstishelService : MonoBehaviour
 
     private void OnOpenColbek()
     {
-        _controlerPause.HandlePause();
+        AudioPauseHandler.Instance.PauseAudio();
         //Time.timeScale = 0;
         //_audioSource.Pause();
 
@@ -41,7 +42,7 @@ public class InterstishelService : MonoBehaviour
 
     private void OnCloseColbek(bool isClosed)
     {
-        _controlerPause.HandlePause();
+        AudioPauseHandler.Instance.UnpauseAudio();
         //Time.timeScale = 1;
 
         //_audioSource.Play();

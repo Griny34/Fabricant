@@ -1,4 +1,5 @@
 using Gameplay.Common;
+using Plugins.Audio.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,7 +37,7 @@ public class RewardService : MonoBehaviour
     private void OnOpenColbek()
     {
         _triggerHandler.gameObject.SetActive(false);
-        _controlerPause.HandlePause();
+        AudioPauseHandler.Instance.PauseAudio();
     }
 
     private void AddMoney()
@@ -49,6 +50,6 @@ public class RewardService : MonoBehaviour
 
     private void OnCloseColbek()
     {
-        _controlerPause.HandlePause();
+        AudioPauseHandler.Instance.UnpauseAudio();
     }
 }
