@@ -7,11 +7,11 @@ public class SoundPlayer : MonoBehaviour
 
     public void ClickSoundButtonPlay()
     {
-        _sourceAudio.Play("Button");
+        _sourceAudio.PlayOneShot("Button");
     }
 
     public void ClickSoundOther()
     {
-        _sourceAudio.Play("niht");
+        _sourceAudio.PlayOneShot("niht");
     }
 }

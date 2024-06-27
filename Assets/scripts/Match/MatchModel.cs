@@ -98,7 +98,7 @@ public class MatchModel : MonoBehaviour
 
 
         _realizationReward.OpenSpawner();
-        _controlerPause.PlayGame();
+        _controlerPause.HandlePause();
         _gameTimer.Stop();
         Initialize();
         onMatchChanged?.Invoke();
@@ -114,7 +114,7 @@ public class MatchModel : MonoBehaviour
 
     private void FinishMatch()
     {
-        _controlerPause.StopTime();
+        _controlerPause.HandlePause();
 
         onFinishing?.Invoke();
 

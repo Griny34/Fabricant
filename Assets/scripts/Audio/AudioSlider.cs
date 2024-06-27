@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class AudioSlider : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
@@ -27,15 +28,27 @@ public class AudioSlider : MonoBehaviour
         }
     }
 
-    public void ChangeVolume(Slider slider)
+    private void OnEnable()
+    {
+        _slider.onValueChanged.AddListener(ChangeVolume);
+        _slider2.onValueChanged.AddListener(ChangeVolume);
+    }
+
+    private void OnDisable()
+    {
+        _slider.onValueChanged.RemoveListener(ChangeVolume);
+        _slider2.onValueChanged.RemoveListener(ChangeVolume);
+    }
+
+    public void ChangeVolume(float sliderValue)
     {
         if(_musicPlayer != null)
         {
-            _musicPlayer.ChangeVolume(slider.value);
+            _musicPlayer.ChangeVolume(sliderValue);
         }
 
         VolumeChanged?.Invoke(_slider.value);
-        SaveVolume(slider);
+        SaveVolume(sliderValue);
     }
 
     //private void OnDestroy()
@@ -43,8 +56,8 @@ public class AudioSlider : MonoBehaviour
     //    PlayerPrefs.SetFloat(_keyVolume, _slider.value);
     //}
 
-    public void SaveVolume(Slider slider)
+    public void SaveVolume(float sliderValue)
     {
-        PlayerPrefs.SetFloat(_keyVolume, slider.value);
+        PlayerPrefs.SetFloat(_keyVolume, sliderValue);
     }
 }

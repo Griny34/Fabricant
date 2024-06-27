@@ -36,7 +36,7 @@ public class RewardService : MonoBehaviour
     private void OnOpenColbek()
     {
         _triggerHandler.gameObject.SetActive(false);
-        _controlerPause.StopGame();
+        _controlerPause.HandlePause();
     }
 
     private void AddMoney()
@@ -49,6 +49,6 @@ public class RewardService : MonoBehaviour
 
     private void OnCloseColbek()
     {
-        _controlerPause.PlayGame();
+        _controlerPause.HandlePause();
     }
 }

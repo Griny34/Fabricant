@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using Plugins.Audio.Core;
 using UnityEngine;
 
 public class ControlerPause : MonoBehaviour
 {
-    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private SourceAudio _sourceAudio;
 
     private bool _isPaused;
     private bool _outOfFocuse;
@@ -31,21 +30,21 @@ public class ControlerPause : MonoBehaviour
         }
     }
 
-    private void HandlePause()
+    public void HandlePause()
     {
         if(_isPaused == false && _outOfFocuse == false)
         {
-            _audioSource.UnPause();
+            _sourceAudio.UnPause();
             Time.timeScale = 1f;
         }
         else
         {
-            _audioSource.Pause();
+            _sourceAudio.Pause();
             Time.timeScale = 0f;
         }
 
         if(_outOfFocuse == false)
-            _audioSource.UnPause();
+            _sourceAudio.UnPause();
     }
 
 

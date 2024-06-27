@@ -8,7 +8,7 @@ public class UserInterface : MonoBehaviour
     [SerializeField] private ControlerPause _controlerPause;
 
     public void PlayGame() =>
-        SceneManager.LoadScene(Tutorial.IsTiger ? "PlayScene" : "TutorialeScene");
+        SceneManager.LoadScene(Tutorial.IsTiger ? "PlayScene" : "TutorialScene");
 
     public void LoadStartMenu() =>
         SceneManager.LoadScene(0);

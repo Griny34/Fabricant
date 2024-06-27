@@ -52,5 +52,6 @@ public class MusicPlayer : MonoBehaviour
     public void ChangeVolume(float value)
     {
         _sourceAudio.Volume = value;
+        //AudioManagement.Instance.SetVolume(value);
     }
 }

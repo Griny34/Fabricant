@@ -5,10 +5,7 @@ using UnityEngine;
 
 public class InterstishelService : MonoBehaviour
 {
-    [SerializeField] private AudioSource _audioSource;
     [SerializeField] private ControlerPause _controlerPause;
-
-    private const string _keyVolume = "Volume";
 
     public void ShowInterstitial(Action onCloseCallBack)
     {
@@ -35,7 +32,7 @@ public class InterstishelService : MonoBehaviour
 
     private void OnOpenColbek()
     {
-        _controlerPause.StopGame();
+        _controlerPause.HandlePause();
         //Time.timeScale = 0;
         //_audioSource.Pause();
 
@@ -44,7 +41,7 @@ public class InterstishelService : MonoBehaviour
 
     private void OnCloseColbek(bool isClosed)
     {
-        _controlerPause.PlayGame();
+        _controlerPause.HandlePause();
         //Time.timeScale = 1;
 
         //_audioSource.Play();

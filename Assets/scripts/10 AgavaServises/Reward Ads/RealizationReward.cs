@@ -30,6 +30,11 @@ public class RealizationReward : MonoBehaviour
                 _coroutine = StartCoroutine(TakeRewardAds());
             }
         };
+
+        _triggerHandler.OnExit += col =>
+        {
+            StopCoroutine(_coroutine);
+        };
     }
 
     public void OpenSpawner()

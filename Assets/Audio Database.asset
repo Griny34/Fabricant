@@ -19,12 +19,6 @@ MonoBehaviour:
     Name: Ceh.mp3
     Preload: 1
     _id: dccc50ab-d445-4380-b46c-27ed90c2fd2a
-  - Clip: {fileID: 8300000, guid: a5aa15d557e87cc409008e7f3009e328, type: 3}
-    Key: Game
-    FolderPath: Audio\
-    Name: Game.mp3
-    Preload: 1
-    _id: 37b83f3b-6bcb-45d6-ac4d-6e0e74fc33eb
   - Clip: {fileID: 8300000, guid: d026266d3a469774bb3f3a48fb3a80af, type: 3}
     Key: Button
     FolderPath: Audio\
@@ -37,3 +31,9 @@ MonoBehaviour:
     Name: niht.mp3
     Preload: 0
     _id: 757128a2-9fc4-43a7-a095-36e06967dc50
+  - Clip: {fileID: 8300000, guid: f26e7c9a7aa2c4641a630372afdaf697, type: 3}
+    Key: Menu
+    FolderPath: Audio\
+    Name: Menu.mp3
+    Preload: 1
+    _id: b11fb6d8-b1fa-45c6-9404-ebefa7c7f2b5

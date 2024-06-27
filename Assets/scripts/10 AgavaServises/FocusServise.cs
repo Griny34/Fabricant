@@ -6,7 +6,6 @@ using UnityEngine.UIElements;
 
 public class FocusServise : MonoBehaviour
 {
-    [SerializeField] private AudioSource _audioSource;
     [SerializeField] private ControlerPause _controlerPause;
 
     private float _maxValue;
