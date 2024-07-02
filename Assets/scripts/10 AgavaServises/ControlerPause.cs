@@ -47,7 +47,11 @@ public class ControlerPause : MonoBehaviour
             _sourceAudio.UnPause();
     }
 
-
+    private void Update()
+    {
+        //Debug.Log(IsPaused + "  IsPaused");
+        //Debug.Log(OutOfFocuse + "  OutOfFocuse");
+    }
     public void StopGame()
     {
 

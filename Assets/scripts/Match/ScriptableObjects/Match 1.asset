@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Match 1
   m_EditorClassIdentifier: 
   _money: 0
-  _time: 300
+  _time: 30
   _numberLevel: 1

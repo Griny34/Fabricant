@@ -37,7 +37,9 @@ public class RewardService : MonoBehaviour
     private void OnOpenColbek()
     {
         _triggerHandler.gameObject.SetActive(false);
-        AudioPauseHandler.Instance.PauseAudio();
+        _controlerPause.OutOfFocuse = true;
+        _controlerPause.HandlePause();
+        //AudioPauseHandler.Instance.PauseAudio();
     }
 
     private void AddMoney()
@@ -50,6 +52,8 @@ public class RewardService : MonoBehaviour
 
     private void OnCloseColbek()
     {
-        AudioPauseHandler.Instance.UnpauseAudio();
+        _controlerPause.OutOfFocuse = false;
+        _controlerPause.HandlePause();
+        //AudioPauseHandler.Instance.UnpauseAudio();
     }
 }

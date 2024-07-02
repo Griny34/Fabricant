@@ -41,6 +41,8 @@ public class MusicPlayer : MonoBehaviour
         {
             _sourceAudio.Play(_sounds[0].Clip.name);
 
+            _sourceAudio.Loop = true;
+
             //_sounds[0].Source.Play();
 
             //Sound sound = _sounds[0];

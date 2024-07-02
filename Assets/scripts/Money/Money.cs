@@ -25,20 +25,30 @@ public class Money : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerPrefs.HasKey("Money"))
+        if (PlayerPrefs.HasKey("money"))
         {
-            _value = PlayerPrefs.GetInt("Money");
+            _value = PlayerPrefs.GetInt("money");
         }
         else
         {
             _value = _startMoney;
         }
 
-        Upgrade.Instace.OnBuyMoney += () =>
-        {
-            UpgradeMoney();
-        };
-    }    
+        //Upgrade.Instace.OnBuyMoney += () =>
+        //{
+        //    UpgradeMoney();
+        //};
+    }
+
+    private void OnEnable()
+    {
+        Upgrade.Instace.OnBuyMoney += UpgradeMoney;
+    }
+
+    private void OnDisable()
+    {
+        Upgrade.Instace.OnBuyMoney -= UpgradeMoney;
+    }
 
     public int GetMoneyValue()
     {
@@ -49,6 +59,6 @@ public class Money : MonoBehaviour
     {
         _value += _upgradeMoney;
 
-        PlayerPrefs.SetInt("Money", _value);
+        PlayerPrefs.SetInt("money", _value);
     }
 }

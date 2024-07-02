@@ -79,7 +79,8 @@ public class MatchModel : MonoBehaviour
 
     public void StartNextMatch()
     {
-        _interstishelServise.ShowInterstitial(StartNestLevel);
+        _interstishelServise.ShowInterstitial();
+        StartNestLevel();
     }
 
     private void StartNestLevel()
@@ -99,7 +100,10 @@ public class MatchModel : MonoBehaviour
 
 
         _realizationReward.OpenSpawner();
-        _userInterface.ResumeGame();
+
+        //_userInterface.ResumeGame();
+        //_controlerPause.HandlePause();
+
         _gameTimer.Stop();
         Initialize();
         onMatchChanged?.Invoke();
@@ -115,7 +119,8 @@ public class MatchModel : MonoBehaviour
 
     private void FinishMatch()
     {
-        _userInterface.StopGame();
+        //_userInterface.StopGame();
+        //_controlerPause.HandlePause();
 
         onFinishing?.Invoke();
 

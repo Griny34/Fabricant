@@ -21,16 +21,40 @@ public class WalletView : MonoBehaviour
 
     private void Start()
     {
-        _wallet.OnMoneyChanged += value =>
-        {
-            _money.text = _wallet.GetMoney().ToString();
-            _money2.text = _wallet.GetMoney().ToString();
-        };
+        //_wallet.OnMoneyChanged += value =>
+        //{
+        //    _money.text = _wallet.GetMoney().ToString();
+        //    _money2.text = _wallet.GetMoney().ToString();
+        //};
 
-        _wallet.OnSalaryChanged += value =>
-        {
-            _salary.text = _wallet.GetSalary().ToString();
-            _salary2.text = _wallet.GetSalary().ToString();
-        };
+        //_wallet.OnSalaryChanged += value =>
+        //{
+        //    _salary.text = _wallet.GetSalary().ToString();
+        //    _salary2.text = _wallet.GetSalary().ToString();
+        //};
+    }
+
+    private void OnEnable()
+    {
+        _wallet.OnMoneyChanged += ChangeMoneyText;
+        _wallet.OnSalaryChanged += ChangeSalaryText;
+    }
+
+    private void OnDisable()
+    {
+        _wallet.OnMoneyChanged -= ChangeMoneyText;
+        _wallet.OnSalaryChanged -= ChangeSalaryText;
+    }
+
+    private void ChangeMoneyText(int number)
+    {
+        _money.text = _wallet.GetMoney().ToString();
+        _money2.text = _wallet.GetMoney().ToString();
+    }
+
+    private void ChangeSalaryText(int number)
+    {
+        _salary.text = _wallet.GetSalary().ToString();
+        _salary2.text = _wallet.GetSalary().ToString();
     }
 }

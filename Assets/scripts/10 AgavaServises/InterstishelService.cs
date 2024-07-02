@@ -8,32 +8,41 @@ public class InterstishelService : MonoBehaviour
 {
     [SerializeField] private ControlerPause _controlerPause;
 
-    public void ShowInterstitial(Action onCloseCallBack)
+    private bool _isClosed;
+
+    public void ShowInterstitial(/*Action onCloseCallBack*/)
     {
         if (Agava.WebUtility.WebApplication.IsRunningOnWebGL == false)
         {
-            onCloseCallBack.Invoke();
+            //onCloseCallBack.Invoke();
             return;
         }
 
 
         if (Agava.WebUtility.AdBlock.Enabled == true)
         {
-            onCloseCallBack.Invoke();
+            //onCloseCallBack.Invoke();
             return;
         }
-            
 
-        Agava.YandexGames.InterstitialAd.Show(OnOpenColbek,(isClosed) => 
-        {
-            OnCloseColbek(isClosed);
-            onCloseCallBack.Invoke();
-        });
+
+        //Agava.YandexGames.InterstitialAd.Show(OnOpenColbek, OnCloseColbek);
+
+
+
+        Agava.YandexGames.InterstitialAd.Show(OnOpenColbek, OnCloseColbek);
+        //{
+            
+            //onCloseCallBack.Invoke();
+        //};
     }
 
     private void OnOpenColbek()
     {
-        AudioPauseHandler.Instance.PauseAudio();
+        _controlerPause.OutOfFocuse = true;
+        _controlerPause.HandlePause();
+
+        //AudioPauseHandler.Instance.PauseAudio();
         //Time.timeScale = 0;
         //_audioSource.Pause();
 
@@ -42,7 +51,11 @@ public class InterstishelService : MonoBehaviour
 
     private void OnCloseColbek(bool isClosed)
     {
-        AudioPauseHandler.Instance.UnpauseAudio();
+        _controlerPause.OutOfFocuse = isClosed;
+        _controlerPause.HandlePause();
+
+        //AudioPauseHandler.Instance.UnpauseAudio();
+
         //Time.timeScale = 1;
 
         //_audioSource.Play();
