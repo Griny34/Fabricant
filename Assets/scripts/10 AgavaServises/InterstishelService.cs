@@ -8,42 +8,40 @@ public class InterstishelService : MonoBehaviour
 {
     [SerializeField] private ControlerPause _controlerPause;
 
-    private bool _isClosed;
+    private bool _isPlayInterstishel = false;
 
-    public void ShowInterstitial(/*Action onCloseCallBack*/)
+    public void ShowInterstitial(Action onCloseCallBack)
     {
         if (Agava.WebUtility.WebApplication.IsRunningOnWebGL == false)
         {
-            //onCloseCallBack.Invoke();
+            onCloseCallBack.Invoke();
             return;
         }
 
 
         if (Agava.WebUtility.AdBlock.Enabled == true)
         {
-            //onCloseCallBack.Invoke();
+            onCloseCallBack.Invoke();
             return;
         }
 
-
         //Agava.YandexGames.InterstitialAd.Show(OnOpenColbek, OnCloseColbek);
 
-
-
         Agava.YandexGames.InterstitialAd.Show(OnOpenColbek, OnCloseColbek);
-        //{
-            
-            //onCloseCallBack.Invoke();
-        //};
+        {
+            onCloseCallBack.Invoke();
+        };
     }
 
     private void OnOpenColbek()
     {
-        _controlerPause.OutOfFocuse = true;
-        _controlerPause.HandlePause();
+        _isPlayInterstishel = true;
+        AudioPauseHandler.Instance.PauseAudio();
+        Time.timeScale = 0;
 
-        //AudioPauseHandler.Instance.PauseAudio();
-        //Time.timeScale = 0;
+        Debug.Log(Time.timeScale + "Началась реклама");
+
+        //_controlerPause.OutOfFocuse = true;
         //_audioSource.Pause();
 
         //AudioListener.volume = 0f;
@@ -51,12 +49,17 @@ public class InterstishelService : MonoBehaviour
 
     private void OnCloseColbek(bool isClosed)
     {
-        _controlerPause.OutOfFocuse = isClosed;
-        _controlerPause.HandlePause();
+        //if (!isClosed)
+        //{
+        //    _controlerPause.OutOfFocuse = false;
+        //}
 
-        //AudioPauseHandler.Instance.UnpauseAudio();
+        _isPlayInterstishel = false;
+        AudioPauseHandler.Instance.UnpauseAudio();
 
-        //Time.timeScale = 1;
+        Time.timeScale = 1;
+
+        Debug.Log(Time.timeScale + "Кончилась реклама");
 
         //_audioSource.Play();
 
@@ -68,5 +71,10 @@ public class InterstishelService : MonoBehaviour
         //{
         //    AudioListener.volume = 1f;
         //}
+    }
+
+    public bool GetFlagAds()
+    {
+        return _isPlayInterstishel;
     }
 }

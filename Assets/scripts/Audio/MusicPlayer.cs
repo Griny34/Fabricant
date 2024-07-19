@@ -22,8 +22,6 @@ public class MusicPlayer : MonoBehaviour
             _sourceAudio.Volume = _volumeOnStart;
         }
 
-
-
         //foreach (Sound sound in _sounds)
         //{
         //    sound.Source = _sourceAudio;

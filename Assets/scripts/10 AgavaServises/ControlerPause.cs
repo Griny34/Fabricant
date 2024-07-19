@@ -48,10 +48,11 @@ public class ControlerPause : MonoBehaviour
     }
 
     private void Update()
-    {
-        //Debug.Log(IsPaused + "  IsPaused");
-        //Debug.Log(OutOfFocuse + "  OutOfFocuse");
+    {        
+        //Application.ExternalEval("console.log(IsPaused);");
+        //Application.ExternalEval("console.log(OutOfFocuse);");
     }
+
     public void StopGame()
     {
 

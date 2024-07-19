@@ -79,12 +79,14 @@ public class MatchModel : MonoBehaviour
 
     public void StartNextMatch()
     {
-        _interstishelServise.ShowInterstitial();
-        StartNestLevel();
+        _interstishelServise.ShowInterstitial(StartNextLevel);        
     }
 
-    private void StartNestLevel()
+    private void StartNextLevel()
     {
+        //_controlerPause.IsPaused = false;
+        //_controlerPause.HandlePause();
+
         Wallet.Instance.RestartSalary();
         
         _mini.SetPlayerScor(Wallet.Instance.GetMoney());
@@ -121,12 +123,14 @@ public class MatchModel : MonoBehaviour
     {
         //_userInterface.StopGame();
         //_controlerPause.HandlePause();
-
+        Time.timeScale = 0;
         onFinishing?.Invoke();
+
+        Debug.Log(Time.timeScale + "Кончился раунд");
 
         StartCoroutine(Utils.MakeActionDelay(0f, () =>
         {
-            onFinished?.Invoke(); 
+            onFinished?.Invoke();
         }));
     }
     

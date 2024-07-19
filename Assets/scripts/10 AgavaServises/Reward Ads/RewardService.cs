@@ -11,9 +11,8 @@ public class RewardService : MonoBehaviour
     [SerializeField] private SpawnerMoney _spawnerMoney;
     [SerializeField] private ControlerPause _controlerPause;
 
-    private string _keyVolume = "Volume";
-
     private int _priceViewing = 5;
+    private bool _isPlayReward = false;
 
     public void ShowRewardAds()
     {
@@ -36,10 +35,12 @@ public class RewardService : MonoBehaviour
 
     private void OnOpenColbek()
     {
+        _isPlayReward = true;
         _triggerHandler.gameObject.SetActive(false);
-        _controlerPause.OutOfFocuse = true;
-        _controlerPause.HandlePause();
-        //AudioPauseHandler.Instance.PauseAudio();
+        //_controlerPause.OutOfFocuse = true;
+        //_controlerPause.HandlePause();
+        AudioPauseHandler.Instance.PauseAudio();
+        Time.timeScale = 0;
     }
 
     private void AddMoney()
@@ -52,8 +53,16 @@ public class RewardService : MonoBehaviour
 
     private void OnCloseColbek()
     {
-        _controlerPause.OutOfFocuse = false;
-        _controlerPause.HandlePause();
-        //AudioPauseHandler.Instance.UnpauseAudio();
+        _isPlayReward = false;
+
+        //_controlerPause.OutOfFocuse = false;
+        //_controlerPause.HandlePause();
+        AudioPauseHandler.Instance.UnpauseAudio();
+        Time.timeScale = 1;
+    }
+
+    public bool GetFlagAds()
+    {
+        return _isPlayReward;
     }
 }

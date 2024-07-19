@@ -1,12 +1,14 @@
 using Agava.YandexGames;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class YndexLeaderBoardMini : MonoBehaviour
 {
     private const string LeaderboardName = "Leaderboard";
 
+#if !UNITY_EDITOR && UNITY_WEBGL
+    
+
+#endif
     public void SetPlayerScor(int scor)
     {
         if (Agava.WebUtility.WebApplication.IsRunningOnWebGL == false)
