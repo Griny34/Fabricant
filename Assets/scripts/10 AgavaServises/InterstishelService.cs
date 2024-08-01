@@ -7,6 +7,7 @@ using UnityEngine;
 public class InterstishelService : MonoBehaviour
 {
     [SerializeField] private ControlerPause _controlerPause;
+    [SerializeField] private MatchModel _matchModel;
 
     private bool _isPlayInterstishel = false;
 
@@ -39,8 +40,6 @@ public class InterstishelService : MonoBehaviour
         AudioPauseHandler.Instance.PauseAudio();
         Time.timeScale = 0;
 
-        Debug.Log(Time.timeScale + "Началась реклама");
-
         //_controlerPause.OutOfFocuse = true;
         //_audioSource.Pause();
 
@@ -55,11 +54,12 @@ public class InterstishelService : MonoBehaviour
         //}
 
         _isPlayInterstishel = false;
+
+        _matchModel.onMatchChanged?.Invoke();
+
         AudioPauseHandler.Instance.UnpauseAudio();
 
         Time.timeScale = 1;
-
-        Debug.Log(Time.timeScale + "Кончилась реклама");
 
         //_audioSource.Play();
 

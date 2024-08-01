@@ -4348,6 +4348,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _controlerPause: {fileID: 1744661471}
+  _interstishelService: {fileID: 0}
+  _rewardService: {fileID: 0}
 --- !u!4 &384875870
 Transform:
   m_ObjectHideFlags: 0
@@ -4967,11 +4969,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 413245858}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0affca1a6da20a46849013fb6339db1, type: 3}
+  m_Script: {fileID: 11500000, guid: d1b5c19d701eb144f96c57b92bd0ebab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _leanLenguage: {fileID: 1722236765}
-  _leanLenguage2: {fileID: 1635209317}
 --- !u!1 &426211245
 GameObject:
   m_ObjectHideFlags: 0
@@ -5834,7 +5835,7 @@ MonoBehaviour:
     Text: "\xDCretici: Bir ba\u015Far\u0131 hikayesi"
     Object: {fileID: 0}
   - Language: English
-    Text: 'Fabricant: success story'
+    Text: 'Fabricant: a success story'
     Object: {fileID: 0}
 --- !u!1 &510263928
 GameObject:

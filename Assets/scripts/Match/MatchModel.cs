@@ -33,10 +33,11 @@ public class MatchModel : MonoBehaviour
     [Header("Events")]
     [SerializeField] private UnityEvent onFinishing;
     [SerializeField] private UnityEvent onFinished;
-    [SerializeField] private UnityEvent onMatchChanged;
+    [SerializeField] public UnityEvent onMatchChanged;
     [SerializeField] private UnityEvent onWin;
 
     private int _currentMatchIndex;
+    private Coroutine _coroutine;
     public MatchModelSO CurrentMatch => _allMatch[_currentMatchIndex];
 
     public event UnityAction OnFinishing
@@ -108,7 +109,14 @@ public class MatchModel : MonoBehaviour
 
         _gameTimer.Stop();
         Initialize();
-        onMatchChanged?.Invoke();
+
+        //if(_coroutine != null)
+        //{
+        //    StopCoroutine(_coroutine);
+        //}
+
+        //_coroutine = StartCoroutine(CloseMenu());
+        //onMatchChanged?.Invoke();
     }
 
     public void ExitMenu()
@@ -125,8 +133,6 @@ public class MatchModel : MonoBehaviour
         //_controlerPause.HandlePause();
         Time.timeScale = 0;
         onFinishing?.Invoke();
-
-        Debug.Log(Time.timeScale + "Кончился раунд");
 
         StartCoroutine(Utils.MakeActionDelay(0f, () =>
         {
@@ -147,5 +153,12 @@ public class MatchModel : MonoBehaviour
         _improvmentMaterialeWheel.SaveValueCounter();
         _improvmentWareHouse.SaveValueCounter();
         _improvmentWareHouse2.SaveValueCounter();
+    }
+
+    private IEnumerator CloseMenu()
+    {
+        yield return new WaitForSeconds(1f);
+
+        onMatchChanged?.Invoke();
     }
 }
