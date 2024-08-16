@@ -546,6 +546,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d86a50fc2f8b81b49a3f7287717d80e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _loadText: {fileID: 739923249}
+  _editorLanguageOnInit: Russian
 --- !u!4 &1103249974
 Transform:
   m_ObjectHideFlags: 0
