@@ -6,7 +6,7 @@ public class Armchair : Furniture
 {
     [SerializeField] private int _price;
 
-    protected override int GivePrice()
+    protected override int GetPrice()
     {
         return _price;
     }

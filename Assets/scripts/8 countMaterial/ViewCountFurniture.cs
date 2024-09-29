@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -9,12 +7,12 @@ public class ViewCountFurniture : ViewCountMaterial
 
     private void Start()
     {
-        _stoolSpawner.OnChangeCount += () =>
+        _stoolSpawner.OnChangedCount += () =>
         {
-            _countDesk.text = _stoolSpawner.GetCountMatiriale().ToString();          
+            _countDesk.text = _stoolSpawner.GetCountMaterial().ToString();
         };
 
-        _stoolSpawner.OnChageCountFurniture += () =>
+        _stoolSpawner.OnChagedCountFurniture += () =>
         {
             _countFurniture.text = _stoolSpawner.GetCountFurniture().ToString();
         };

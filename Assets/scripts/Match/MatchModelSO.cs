@@ -10,6 +10,8 @@ public class MatchModelSO : ScriptableObject
     [SerializeField] private int _numberLevel;
 
     public int Money => _money;
+
     public int Time => _time;
+
     public int NumberLevel => _numberLevel;
 }

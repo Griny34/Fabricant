@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -10,9 +8,9 @@ public class ViewCoutFurniture : MonoBehaviour
 
     private void Start()
     {
-        _spawnerFurniture.OnChageCountFurniture += () =>
+        _spawnerFurniture.OnChagedCountFurniture += () =>
         {
             _countFurniture.text = _spawnerFurniture.GetCountFurniture().ToString();
-        };       
+        };
     }
 }

@@ -1,15 +1,12 @@
 using Gameplay.Common;
 using Plugins.Audio.Core;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RewardService : MonoBehaviour
 {
     [SerializeField] private TriggerHandler _triggerHandler;
     [SerializeField] private SpawnerMoney _spawnerMoney;
-    [SerializeField] private ControlerPause _controlerPause;
+    //[SerializeField] private PauseController _controlerPause;
 
     private int _priceViewing = 5;
     private bool _isPlayReward = false;
@@ -17,18 +14,10 @@ public class RewardService : MonoBehaviour
     public void ShowRewardAds()
     {
         if (Agava.WebUtility.WebApplication.IsRunningOnWebGL == false)
-        {
-            
             return;
-        }
-
 
         if (Agava.WebUtility.AdBlock.Enabled == true)
-        {
-           
             return;
-        }
-
 
         Agava.YandexGames.VideoAd.Show(OnOpenColbek, AddMoney, OnCloseColbek);
     }
@@ -37,8 +26,6 @@ public class RewardService : MonoBehaviour
     {
         _isPlayReward = true;
         _triggerHandler.gameObject.SetActive(false);
-        //_controlerPause.OutOfFocuse = true;
-        //_controlerPause.HandlePause();
         AudioPauseHandler.Instance.PauseAudio();
         Time.timeScale = 0;
     }
@@ -54,9 +41,6 @@ public class RewardService : MonoBehaviour
     private void OnCloseColbek()
     {
         _isPlayReward = false;
-
-        //_controlerPause.OutOfFocuse = false;
-        //_controlerPause.HandlePause();
         AudioPauseHandler.Instance.UnpauseAudio();
         Time.timeScale = 1;
     }

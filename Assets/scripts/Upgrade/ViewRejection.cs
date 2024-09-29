@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class ViewRejection : MonoBehaviour
@@ -16,14 +14,12 @@ public class ViewRejection : MonoBehaviour
     {
         _upgrade.OnCanNotBuySpeed += () =>
         {
-            if(_coroutine != null)
+            if (_coroutine != null)
             {
                 StopCoroutine(_coroutine);
             }
 
             _coroutine = StartCoroutine(PlayAnimation());
-
-            //_animator.SetTrigger(_click);
         };
 
         _upgrade.OnCanNotBayDesk += () =>
@@ -34,7 +30,6 @@ public class ViewRejection : MonoBehaviour
             }
 
             _coroutine = StartCoroutine(PlayAnimation());
-            //_animator.SetTrigger(_click);
         };
 
         _upgrade.OnCanNotBayChair += () =>
@@ -45,7 +40,6 @@ public class ViewRejection : MonoBehaviour
             }
 
             _coroutine = StartCoroutine(PlayAnimation());
-            //_animator.SetTrigger(_click);
         };
 
         _upgrade.OnCanNotBuyMoney += () =>
@@ -56,7 +50,6 @@ public class ViewRejection : MonoBehaviour
             }
 
             _coroutine = StartCoroutine(PlayAnimation());
-            //_animator.SetTrigger(_click);
         };
     }
 

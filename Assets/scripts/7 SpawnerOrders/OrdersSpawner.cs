@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class OrdersSpawner : MonoBehaviour
 {
@@ -23,11 +20,11 @@ public class OrdersSpawner : MonoBehaviour
 
     private void CreateOrder()
     {
-        int number = UnityEngine.Random.Range(0, _orders.Count);
+        int number = Random.Range(0, _orders.Count);
 
         Order clon = _orders[number];
 
-        if (clon.GetBool() == true)
+        if (clon.GetIsOpen() == true)
         {
             Order order = Instantiate(clon, _pointOrder.position, Quaternion.identity, _pointFinish);
 
@@ -57,12 +54,12 @@ public class OrdersSpawner : MonoBehaviour
     private IEnumerator CameOrder()
     {
         yield return new WaitForSeconds(1f);
+
         CreateOrder();
 
         while (RelevantOrder().transform.position != _pointFinish.position)
         {
-            RelevantOrder().transform.position = Vector3.MoveTowards(RelevantOrder().transform.position, _pointFinish.position,
-                _speed * Time.deltaTime);
+            RelevantOrder().transform.position = Vector3.MoveTowards(RelevantOrder().transform.position, _pointFinish.position, _speed * Time.deltaTime);
 
             yield return null;
         }

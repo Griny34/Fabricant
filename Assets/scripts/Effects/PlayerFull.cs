@@ -11,16 +11,16 @@ public class PlayerFull : MonoBehaviour
 
     private void OnEnable()
     {
-        _conveyor.OnFull += PlayParticle;
-        _shelfLeather.OnFull += PlayParticle;
-        _shelfWheel.OnFull += PlayParticle;
+        _conveyor.OnFilled += PlayParticle;
+        _shelfLeather.OnFilled += PlayParticle;
+        _shelfWheel.OnFilled += PlayParticle;
     }
 
     private void OnDisable()
     {
-        _conveyor.OnFull -= PlayParticle;
-        _shelfLeather.OnFull -= PlayParticle;
-        _shelfWheel.OnFull -= PlayParticle;
+        _conveyor.OnFilled -= PlayParticle;
+        _shelfLeather.OnFilled -= PlayParticle;
+        _shelfWheel.OnFilled -= PlayParticle;
     }
 
     private void PlayParticle()

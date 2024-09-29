@@ -1,30 +1,27 @@
-using DG.Tweening;
-using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class StackFurniture : MonoBehaviour
 {
     [SerializeField] private Transform _pointStartStack;
-    [SerializeField] private int _maxCountFurniture;
+    //[SerializeField] private int _maxCountFurniture;
 
     private List<Furniture> _furnitures = new List<Furniture>();
+    private float _delay = 0.5f;
+    private float _powerJump = 1;
+    private int _numberJumps = 1;
 
     public bool IsFull { get; private set; } = false;
 
-    private void Start()
-    {
-        
-    }
-
     public void RemoveFurniture(Furniture furniture, Transform pointDestroy)
     {
-        if (furniture == null) return;
+        if (furniture == null) 
+            return;
 
         furniture.transform.SetParent(null);
 
-        furniture.transform.DOJump(pointDestroy.position, 1, 1, 0.5f).OnComplete(
-            () =>
+        furniture.transform.DOJump(pointDestroy.position, _powerJump, _numberJumps, _delay).OnComplete(() =>
             {
                 RemoveFurnitur(furniture);
                 Destroy(furniture.gameObject);
@@ -43,7 +40,7 @@ public class StackFurniture : MonoBehaviour
 
     public Furniture GetFurniture()
     {
-        if(_furnitures.Count == 0)
+        if (_furnitures.Count == 0)
         {
             return null;
         }

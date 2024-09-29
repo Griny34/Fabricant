@@ -1,9 +1,7 @@
-using Agava.YandexGames;
-using DG.Tweening;
-using Gameplay.Common;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using DG.Tweening;
+using Gameplay.Common;
 using UnityEngine;
 
 public class WareHause : MonoBehaviour
@@ -16,6 +14,8 @@ public class WareHause : MonoBehaviour
     [SerializeField] private float _delayStartAction;
     [SerializeField] private Transform _point;
     private float _delay = 0.5f;
+    private float _powerJump =  1;
+    private int _numberJumps = 1;
     private bool _isOpen = true;
     private Furniture _furniture;
     private Coroutine _coroutineGive;
@@ -30,28 +30,61 @@ public class WareHause : MonoBehaviour
 
     private void Start()
     {
-        _triggerHandler.OnEnter += col =>
+        //_triggerHandler.OnEnter += col =>
+        //{
+        //    if (_stackFurniture.GetListStack().Count != 0 && _isOpen == true)
+        //    {
+        //        if (_coroutineGive != null)
+        //        {
+        //            StopCoroutine(_coroutineGive);
+        //        }
+
+        //        _coroutineGive = StartCoroutine(GiveFuniture());
+        //    }
+
+        //    if (_stackFurniture.GetListStack().Count == 0 && _isOpen == false)
+        //    {
+        //        if (_coroutineTake != null)
+        //        {
+        //            StopCoroutine(_coroutineTake);
+        //        }
+
+        //        _coroutineTake = StartCoroutine(TakeFurniture());
+        //    }
+        //};
+    }
+
+    private void OnEnable()
+    {
+        _triggerHandler.OnEnter += StartAction;
+    }
+
+    private void OnDisable()
+    {
+        _triggerHandler.OnEnter -= StartAction;
+    }
+
+    private void StartAction(Collider collider)
+    {
+        if (_stackFurniture.GetListStack().Count != 0 && _isOpen == true)
         {
-            if(_stackFurniture.GetListStack().Count != 0 && _isOpen == true)
+            if (_coroutineGive != null)
             {
-                if(_coroutineGive != null)
-                {
-                    StopCoroutine(_coroutineGive);
-                }
-
-                _coroutineGive = StartCoroutine(GiveFuniture());
+                StopCoroutine(_coroutineGive);
             }
 
-            if(_stackFurniture.GetListStack().Count == 0 && _isOpen == false)
-            {
-                if (_coroutineTake != null)
-                {
-                    StopCoroutine(_coroutineTake);
-                }
+            _coroutineGive = StartCoroutine(GiveFuniture());
+        }
 
-                _coroutineTake = StartCoroutine(TakeFurniture());
+        if (_stackFurniture.GetListStack().Count == 0 && _isOpen == false)
+        {
+            if (_coroutineTake != null)
+            {
+                StopCoroutine(_coroutineTake);
             }
-        };
+
+            _coroutineTake = StartCoroutine(TakeFurniture());
+        }
     }
 
     private IEnumerator GiveFuniture()
@@ -84,7 +117,7 @@ public class WareHause : MonoBehaviour
 
         furniture.transform.SetParent(null);
 
-        furniture.transform.DOJump(pointDestroy.position, 1, 1, _delay).OnComplete(
+        furniture.transform.DOJump(pointDestroy.position, _powerJump, _numberJumps, _delay).OnComplete(
             () =>
             {
                 _stackFurniture.RemoveFurnitur(furniture);              
@@ -123,9 +156,9 @@ public class WareHause : MonoBehaviour
     {
         if (PlayerPrefs.HasKey(_keySave))
         {
-            foreach(Furniture furniture in _listPrefabFurniture.GetListPrefabFurniture())
+            foreach (Furniture furniture in _listPrefabFurniture.GetListPrefabFurniture())
             {
-                if(furniture.GetName() == PlayerPrefs.GetString(_keySave))
+                if (furniture.GetName() == PlayerPrefs.GetString(_keySave))
                 {
                     _furniture = Instantiate(furniture, _point.position, Quaternion.identity);
 

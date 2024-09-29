@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PointOff : MonoBehaviour
@@ -8,7 +6,7 @@ public class PointOff : MonoBehaviour
 
     private void Start()
     {
-        if(Instance != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;

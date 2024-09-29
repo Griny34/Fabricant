@@ -1,6 +1,5 @@
-using Gameplay.Common;
 using System.Collections;
-using System.Collections.Generic;
+using Gameplay.Common;
 using UnityEngine;
 
 public class Trashcan : MonoBehaviour
@@ -9,29 +8,60 @@ public class Trashcan : MonoBehaviour
     [SerializeField] private StackMaterial _stackMaterial;
     [SerializeField] private StackFurniture _stackFurniture;
 
+    private float _delayCoroutine = 0.5f;
     private Coroutine _coroutine;
     private Material _material;
     private Furniture _furniture;
 
     private void Start()
     {
-        _triggerHandler.OnEnter += col =>
-        {
-            if(_coroutine != null)
-            {
-                StopCoroutine(_coroutine);
-            }
+        //_triggerHandler.OnEnter += col =>
+        //{
+        //    if (_coroutine != null)
+        //    {
+        //        StopCoroutine(_coroutine);
+        //    }
 
-            _coroutine = StartCoroutine(ClearStacK());
-        };
+        //    _coroutine = StartCoroutine(ClearStacK());
+        //};
 
-        _triggerHandler.OnExit += col =>
+        //_triggerHandler.OnExit += col =>
+        //{
+        //    if (_coroutine != null)
+        //    {
+        //        StopCoroutine(_coroutine);
+        //    }
+        //};
+    }
+
+    private void OnEnable()
+    {
+        _triggerHandler.OnEnter += WorkEventEnter;
+        _triggerHandler.OnExit += WorkEventExit;
+    }
+
+    private void OnDisable()
+    {
+        _triggerHandler.OnEnter -= WorkEventEnter;
+        _triggerHandler.OnExit -= WorkEventExit;
+    }
+
+    private void WorkEventEnter(Collider collider)
+    {
+        if (_coroutine != null)
         {
-            if (_coroutine != null)
-            {
-                StopCoroutine(_coroutine);
-            }
-        };
+            StopCoroutine(_coroutine);
+        }
+
+        _coroutine = StartCoroutine(ClearStacK());
+    }
+
+    private void WorkEventExit(Collider collider)
+    {
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+        }
     }
 
     private IEnumerator ClearStacK()
@@ -42,16 +72,16 @@ public class Trashcan : MonoBehaviour
 
             _stackMaterial.RemoveDesk(_material, gameObject.transform);
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(_delayCoroutine);
         }
 
-        while(_stackFurniture.GetListStack().Count != 0)
+        while (_stackFurniture.GetListStack().Count != 0)
         {
             _furniture = _stackFurniture.GetFurniture();
 
             _stackFurniture.RemoveFurniture(_furniture, gameObject.transform);
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(_delayCoroutine);
         }
     }
 }

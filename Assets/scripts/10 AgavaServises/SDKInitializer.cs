@@ -1,7 +1,6 @@
 using Agava.YandexGames;
 using Lean.Localization;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,25 +25,17 @@ public class SDKInitializer : MonoBehaviour
 
     private IEnumerator Start()
     {
-        //if (Agava.WebUtility.WebApplication.IsRunningOnWebGL == false)
-        //{
-        //    yield break;
-        //}           
-
         Debug.Log("start");
         yield return YandexGamesSdk.Initialize(Initializer);
     }
 
     private void Initializer()
     {
-        //if (Agava.WebUtility.WebApplication.IsRunningOnWebGL == false)
-        //    return;
-
         LeanLocalization.SetCurrentLanguageAll(YandexGamesSdk.Environment.i18n.lang switch
         {
             "ru" => "Russian",
             "tr" => "Turkish",
-            "en" => "English"
+            _ => "English"
         });
 
         _loadText.enabled = true;

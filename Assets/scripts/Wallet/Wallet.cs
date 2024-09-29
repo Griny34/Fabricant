@@ -1,12 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Wallet : MonoBehaviour
 {
-    public static Wallet Instance { get; private set; }
-
     [SerializeField] private int _money;
 
     private int _salary = 0;
@@ -14,6 +10,8 @@ public class Wallet : MonoBehaviour
 
     public event Action<int> OnMoneyChanged;
     public event Action<int> OnSalaryChanged;
+
+    public static Wallet Instance { get; private set; }
 
     private void Awake()
     {

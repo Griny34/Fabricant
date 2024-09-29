@@ -1,8 +1,8 @@
-using Gameplay.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Gameplay.Common;
 using UnityEngine;
 
 public class ShelfWheel : MonoBehaviour
@@ -18,39 +18,69 @@ public class ShelfWheel : MonoBehaviour
     [SerializeField] private float _delay;
 
     private float _elepsedTime = 0;
+    private float _delayCoroutine = 0.5f;
 
     private List<Wheel> _pool = new List<Wheel>();
     private Wheel _relevantLeather;
     private Coroutine _coroutine;
 
-    public event Action OnFull;
+    public event Action OnFilled;
 
     private void Start()
     {
-        _playerTrigger.OnEnter += col =>
-        {
-            if (col.GetComponent<JoystickPlayer>() == null) return;
+        //_playerTrigger.OnEnter += col =>
+        //{
+        //    if (col.GetComponent<JoystickPlayer>() == null) return;
 
-            OutDesk();
-        };
+        //    OutDesk();
+        //};
 
-        _playerTrigger.OnExit += col =>
-        {
-            if (_coroutine != null)
-            {
-                StopCoroutine(_coroutine);
-            }
-        };
+        //_playerTrigger.OnExit += col =>
+        //{
+        //    if (_coroutine != null)
+        //    {
+        //        StopCoroutine(_coroutine);
+        //    }
+        //};
 
         Initialize();
     }
+
+    private void OnEnable()
+    {
+        _playerTrigger.OnEnter += WorkEventEnter;
+        _playerTrigger.OnExit += WorkEventExit;
+    }
+
+    private void OnDisable()
+    {
+        _playerTrigger.OnEnter -= WorkEventEnter;
+        _playerTrigger.OnExit -= WorkEventExit;
+    }
+
+    private void WorkEventEnter(Collider collider)
+    {
+        if (collider.GetComponent<JoystickPlayer>() == null)
+            return;
+
+        OutDesk();
+    }
+
+    private void WorkEventExit(Collider collider)
+    {
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+        }
+    }
+
     private void Update()
     {
         _elepsedTime += Time.deltaTime;
 
         if (_elepsedTime >= _delay)
         {
-            if (TryGetGameObject(out Wheel desk))
+            if (TryGetGameWheel(out Wheel desk))
             {
                 _elepsedTime = 0;
 
@@ -82,7 +112,7 @@ public class ShelfWheel : MonoBehaviour
         _pool.Add(spawned);
     }
 
-    private bool TryGetGameObject(out Wheel result)
+    private bool TryGetGameWheel(out Wheel result)
     {
         result = _pool.FirstOrDefault(p => p.gameObject.activeSelf == false);
 
@@ -95,23 +125,6 @@ public class ShelfWheel : MonoBehaviour
         {
             return null;
         }
-
-        //float minDistance = Mathf.Infinity;
-        //int nearestDeskIndex = 0;
-        //int indexCounter = 0;
-
-        //foreach (Leather desk in _pool)
-        //{
-        //    float distance = Vector3.Distance(desk.transform.position, _player.transform.position);
-
-        //    if (distance < minDistance)
-        //    {
-        //        nearestDeskIndex = indexCounter;
-        //        minDistance = distance;
-        //    }
-
-        //    indexCounter++;
-        //}
 
         return _pool[_pool.Count - 1];
     }
@@ -136,9 +149,9 @@ public class ShelfWheel : MonoBehaviour
             _pool.Remove(_relevantLeather);
 
             Spawn();
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(_delayCoroutine);
         }
 
-        OnFull?.Invoke();
+        OnFilled?.Invoke();
     }
 }

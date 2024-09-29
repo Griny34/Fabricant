@@ -10,7 +10,6 @@ public class TimerView : MonoBehaviour
 
     private void Awake()
     {
-        //_timer.OnStarted += UpdateUI;
         _timer.OnTick += seconds =>
         {
             UpdateUI(seconds);
@@ -24,7 +23,7 @@ public class TimerView : MonoBehaviour
 
     private string ParseTime(int seconds)
     {
-        string number = "";
+        string number = string.Empty;
         int min = seconds / 60;
         int sec = seconds % 60;
        
@@ -32,12 +31,14 @@ public class TimerView : MonoBehaviour
         {
             number += "0";
         }
+
         number += min + ":";
 
         if (sec < 10)
         {
             number += "0";
         }
+
         number += sec;
 
         return number ;

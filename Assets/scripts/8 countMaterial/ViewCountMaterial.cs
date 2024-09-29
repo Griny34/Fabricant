@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -10,9 +8,9 @@ public class ViewCountMaterial : MonoBehaviour
 
     private void Start()
     {
-        _stoolSpawner.OnChangeCount += () =>
+        _stoolSpawner.OnChangedCount += () =>
         {
-            _countDesk.text = _stoolSpawner.GetCountMatiriale().ToString();
+            _countDesk.text = _stoolSpawner.GetCountMaterial().ToString();
         };
     }
 }

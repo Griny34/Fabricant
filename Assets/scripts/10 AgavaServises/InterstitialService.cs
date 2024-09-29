@@ -1,12 +1,10 @@
 using Plugins.Audio.Core;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class InterstishelService : MonoBehaviour
+public class InterstitialService : MonoBehaviour
 {
-    [SerializeField] private ControlerPause _controlerPause;
+    [SerializeField] private PauseController _controlerPause;
     [SerializeField] private MatchModel _matchModel;
 
     private bool _isPlayInterstishel = false;
@@ -26,8 +24,6 @@ public class InterstishelService : MonoBehaviour
             return;
         }
 
-        //Agava.YandexGames.InterstitialAd.Show(OnOpenColbek, OnCloseColbek);
-
         Agava.YandexGames.InterstitialAd.Show(OnOpenColbek, OnCloseColbek);
         {
             onCloseCallBack.Invoke();
@@ -39,38 +35,17 @@ public class InterstishelService : MonoBehaviour
         _isPlayInterstishel = true;
         AudioPauseHandler.Instance.PauseAudio();
         Time.timeScale = 0;
-
-        //_controlerPause.OutOfFocuse = true;
-        //_audioSource.Pause();
-
-        //AudioListener.volume = 0f;
     }
 
     private void OnCloseColbek(bool isClosed)
     {
-        //if (!isClosed)
-        //{
-        //    _controlerPause.OutOfFocuse = false;
-        //}
-
         _isPlayInterstishel = false;
 
-        _matchModel.onMatchChanged?.Invoke();
+        _matchModel.OnMatchChanged?.Invoke();
 
         AudioPauseHandler.Instance.UnpauseAudio();
 
         Time.timeScale = 1;
-
-        //_audioSource.Play();
-
-        //if (PlayerPrefs.HasKey(_keyVolume))
-        //{
-        //    AudioListener.volume = PlayerPrefs.GetFloat(_keyVolume);
-        //}
-        //else
-        //{
-        //    AudioListener.volume = 1f;
-        //}
     }
 
     public bool GetFlagAds()

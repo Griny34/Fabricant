@@ -1,20 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class MatchModel : MonoBehaviour
 {
-    public static MatchModel Instace { get; private set; }
-
-
-    [SerializeField] private InterstishelService _interstishelServise;
+    [SerializeField] private InterstitialService _interstishelServise;
     [SerializeField] private MatchModelSO[] _allMatch;
     [SerializeField] private RealizationReward _realizationReward;
     [SerializeField] private YndexLeaderBoardMini _mini;
-    [SerializeField] private ControlerPause _controlerPause;
-    [SerializeField] private UserInterface _userInterface;
+    [SerializeField] private PauseController _controlerPause;
+    [SerializeField] private UserInterface _userInterface;  
 
     [Header("Timer")]
     [SerializeField] private Timer _gameTimer;
@@ -29,16 +25,15 @@ public class MatchModel : MonoBehaviour
     [SerializeField] private ImprovmentMateriale _improvmentMaterialeWheel;
     [SerializeField] private ImprovmentWareHouse _improvmentWareHouse;
     [SerializeField] private ImprovmentWareHouse _improvmentWareHouse2;
+    [SerializeField] private Upgrade _upgrade;
 
     [Header("Events")]
     [SerializeField] private UnityEvent onFinishing;
     [SerializeField] private UnityEvent onFinished;
-    [SerializeField] public UnityEvent onMatchChanged;
+    [SerializeField] public UnityEvent OnMatchChanged;
     [SerializeField] private UnityEvent onWin;
 
     private int _currentMatchIndex;
-    private Coroutine _coroutine;
-    public MatchModelSO CurrentMatch => _allMatch[_currentMatchIndex];
 
     public event UnityAction OnFinishing
     {
@@ -52,9 +47,13 @@ public class MatchModel : MonoBehaviour
         remove => onFinished?.RemoveListener(value);
     }
 
+    public static MatchModel Instace { get; private set; }
+
+    public MatchModelSO CurrentMatch => _allMatch[_currentMatchIndex];
+
     private void Awake()
     {
-        if(Instace != null)
+        if (Instace != null)
         {
             Destroy(Instace);
             return;
@@ -75,19 +74,16 @@ public class MatchModel : MonoBehaviour
 
     public void Initialize()
     {
-        _gameTimer.StartTimer(CurrentMatch.Time);       
+        _gameTimer.StartTimer(CurrentMatch.Time);
     }
 
     public void StartNextMatch()
     {
-        _interstishelServise.ShowInterstitial(StartNextLevel);        
+        _interstishelServise.ShowInterstitial(StartNextLevel);
     }
 
     private void StartNextLevel()
     {
-        //_controlerPause.IsPaused = false;
-        //_controlerPause.HandlePause();
-
         Wallet.Instance.RestartSalary();
         
         _mini.SetPlayerScor(Wallet.Instance.GetMoney());
@@ -96,27 +92,14 @@ public class MatchModel : MonoBehaviour
 
         if (_currentMatchIndex >= _allMatch.Length)
         {
-            // logic
             SceneManager.LoadScene(1);
             return;
         }
 
-
         _realizationReward.OpenSpawner();
-
-        //_userInterface.ResumeGame();
-        //_controlerPause.HandlePause();
 
         _gameTimer.Stop();
         Initialize();
-
-        //if(_coroutine != null)
-        //{
-        //    StopCoroutine(_coroutine);
-        //}
-
-        //_coroutine = StartCoroutine(CloseMenu());
-        //onMatchChanged?.Invoke();
     }
 
     public void ExitMenu()
@@ -129,8 +112,6 @@ public class MatchModel : MonoBehaviour
 
     private void FinishMatch()
     {
-        //_userInterface.StopGame();
-        //_controlerPause.HandlePause();
         Time.timeScale = 0;
         onFinishing?.Invoke();
 
@@ -142,7 +123,7 @@ public class MatchModel : MonoBehaviour
     
     private void SaveGame()
     {
-        Wallet.Instance.SaveMoney();       
+        Wallet.Instance.SaveMoney();
 
         _improvmentSpawnerChair.SaveValueCounter();
         _improvmentSpawnerArmChair.SaveValueCounter();
@@ -153,12 +134,14 @@ public class MatchModel : MonoBehaviour
         _improvmentMaterialeWheel.SaveValueCounter();
         _improvmentWareHouse.SaveValueCounter();
         _improvmentWareHouse2.SaveValueCounter();
+
+        _upgrade.LoadTryes();
     }
 
     private IEnumerator CloseMenu()
     {
         yield return new WaitForSeconds(1f);
 
-        onMatchChanged?.Invoke();
+        OnMatchChanged?.Invoke();
     }
 }

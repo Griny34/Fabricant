@@ -1,11 +1,13 @@
-using Gameplay.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Gameplay.Common;
 using UnityEngine;
 
 public abstract class SpawnerFurniture : MonoBehaviour
 {
+    private const string _animationWork = "Work";
+
     [SerializeField] protected TriggerHandler _triggerHandler;
     [SerializeField] protected TriggerHandler _ariaSpawner;
     [SerializeField] protected Transform _pointSpawner;
@@ -19,6 +21,7 @@ public abstract class SpawnerFurniture : MonoBehaviour
 
     [SerializeField] protected Animator _worker;
 
+    private float _timeAnimationMan = 3f;
     protected List<Furniture> _furnitures = new List<Furniture>();
     protected Material _materialeRelevant;
     protected Material _materiale;
@@ -29,37 +32,9 @@ public abstract class SpawnerFurniture : MonoBehaviour
     protected bool _isAnimationPlay = false;
     protected Coroutine _coroutineAnimation;
 
-    public virtual event Action OnStartEffect;
-    public virtual event Action OnChangeCount;
-    public virtual event Action OnChageCountFurniture;
-
-    private void Start()
-    {
-        //_triggerHandler.OnEnter += col =>
-        //{
-        //    if (col.GetComponent<JoystickPlayer>() == null) return;
-
-        //    if (IsOpen == false) return;
-
-        //    if (GetCountFurniture() != 0) return;
-
-        //    if (_stackMaterial.GetListMaterial().Count == 0) return;
-
-        //    if (_coroutine != null)
-        //    {
-        //        StopCoroutine(_coroutine);
-        //    }
-
-        //    _coroutine = StartCoroutine(AcceptMaterial());
-        //};
-
-        _ariaSpawner.OnEnter += col =>
-        {
-            if (_stackFurniture.IsFull == true) return;
-
-            GivStool();
-        };
-    }
+    public virtual event Action OnStartedEffect;
+    public virtual event Action OnChangedCount;
+    public virtual event Action OnChagedCountFurniture;
 
     protected virtual void CreatFurniture()
     {
@@ -67,36 +42,8 @@ public abstract class SpawnerFurniture : MonoBehaviour
 
         _furnitures.Add(furniture);
 
-        OnStartEffect?.Invoke();
+        OnStartedEffect?.Invoke();
     }
-
-    //protected virtual IEnumerator AcceptMaterial()
-    //{
-    //    while (_stackMaterial.GetListMaterial().Count != 0 && _countBoardsForCreate != _countBoard)
-    //    {
-    //        _materialeRelevant = SearchMateriale();
-
-    //        _stackMaterial.RemoveDesk(_materialeRelevant, gameObject.transform);
-
-    //        yield return new WaitForSeconds(0.5f);
-
-    //        _countBoard++;
-
-    //        OnChangeCount?.Invoke();
-
-    //        if (_countBoardsForCreate == _countBoard)
-    //        {
-    //            IsOpen = false;
-
-    //            if (_coroutineAnimation != null)
-    //            {
-    //                StopCoroutine(_coroutineAnimation);
-    //            }
-
-    //            _coroutineAnimation = StartCoroutine(PlayAnimation());
-    //        }
-    //    }
-    //}
 
     protected virtual IEnumerator PlayAnimation()
     {
@@ -104,31 +51,17 @@ public abstract class SpawnerFurniture : MonoBehaviour
 
         while (_isAnimationPlay != false)
         {
-            _worker.SetBool("Work", _isAnimationPlay);
+            _worker.SetBool(_animationWork, _isAnimationPlay);
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(_timeAnimationMan);
 
             _isAnimationPlay = false;
 
-            _worker.SetBool("Work", _isAnimationPlay);
+            _worker.SetBool(_animationWork, _isAnimationPlay);
 
             CreatFurniture();
         }
     }
-
-    //protected virtual Material SearchMateriale()
-    //{
-    //    foreach (var material in _stackMaterial.GetListMaterial())
-    //    {
-    //        if (material is Board)
-    //        {
-    //            _materiale = (Board)material;
-    //            return _materiale;
-    //        }
-    //    }
-
-    //    return null;
-    //}
 
     protected virtual void GivStool()
     {
@@ -146,10 +79,10 @@ public abstract class SpawnerFurniture : MonoBehaviour
 
         _countBoard = 0;
 
-        OnChangeCount?.Invoke();
+        OnChangedCount?.Invoke();
     }
 
-    public virtual int GetCountMatiriale()
+    public virtual int GetCountMaterial()
     {
         return _countBoard;
     }

@@ -1,6 +1,5 @@
-using Gameplay.Common;
 using System.Collections;
-using System.Collections.Generic;
+using Gameplay.Common;
 using UnityEngine;
 
 public class RealizationReward : MonoBehaviour
@@ -14,35 +13,68 @@ public class RealizationReward : MonoBehaviour
 
     private Coroutine _coroutine;
     private bool _isOpenReward = true;
-    private bool _isWorkCoroutine = true;
+    //private bool _isWorkCoroutine = true;
 
     private void Start()
     {       
-        _triggerHandler.OnEnter += col =>
-        {
-            if (_isOpenReward == true)
-            {
-                if (_coroutine != null)
-                {
-                    StopCoroutine(_coroutine);
-                }
+        //_triggerHandler.OnEnter += col =>
+        //{
+        //    if (_isOpenReward == true)
+        //    {
+        //        if (_coroutine != null)
+        //        {
+        //            StopCoroutine(_coroutine);
+        //        }
 
-                _coroutine = StartCoroutine(TakeRewardAds());
-            }
-        };
+        //        _coroutine = StartCoroutine(TakeRewardAds());
+        //    }
+        //};
 
-        _triggerHandler.OnExit += col =>
-        {
-            StopCoroutine(_coroutine);
-        };
+        //_triggerHandler.OnExit += col =>
+        //{
+        //    StopCoroutine(_coroutine);
+        //};
+    }
+
+    private void OnEnable()
+    {
+        _triggerHandler.OnEnter += WorkEventEnter;
+        _triggerHandler.OnExit += WorkEventExit;
+    }
+
+    private void OnDisable()
+    {
+        _triggerHandler.OnEnter -= WorkEventEnter;
+        _triggerHandler.OnExit -= WorkEventExit;
     }
 
     public void OpenSpawner()
     {
-        _isWorkCoroutine = true;
+        //_isWorkCoroutine = true;
         _isOpenReward = true;
         _triggerHandler.gameObject.SetActive(true);
     }   
+
+    private void WorkEventEnter(Collider collider)
+    {
+        if (_isOpenReward == true)
+        {
+            if (_coroutine != null)
+            {
+                StopCoroutine(_coroutine);
+            }
+
+            _coroutine = StartCoroutine(TakeRewardAds());
+        }
+    }
+
+    private void WorkEventExit(Collider collider)
+    {
+        if(_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+        }
+    }
 
     private IEnumerator TakeRewardAds()
     {
@@ -52,6 +84,6 @@ public class RealizationReward : MonoBehaviour
 
         _rewardService.ShowRewardAds();
 
-        _isWorkCoroutine = false;
+        //_isWorkCoroutine = false;
     }
 }

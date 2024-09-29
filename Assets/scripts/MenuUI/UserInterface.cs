@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class UserInterface : MonoBehaviour
 {
-    [SerializeField] private ControlerPause _controlerPause;
+    private const string _playScene = "PlayScene";
+    private const string _tutorialScene = "TutorialScene";
+
+    [SerializeField] private PauseController _controlerPause;
 
     public void PlayGame() =>
-        SceneManager.LoadScene(Tutorial.IsTiger ? "PlayScene" : "TutorialScene");
+        SceneManager.LoadScene(Tutorial.IsTiger ? _playScene : _tutorialScene);
 
     public void LoadStartMenu() =>
         SceneManager.LoadScene(0);

@@ -1,7 +1,7 @@
 using Gameplay.Common;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class Car : MonoBehaviour
@@ -21,50 +21,95 @@ public class Car : MonoBehaviour
 
     [SerializeField] private Transform _startPosition;
 
-
     private List<Furniture> _chairs = new List<Furniture>();
     private Furniture _relevantFurniture;
     private Coroutine _corutine;
     private Coroutine _corutineChair;
     private int _countChair;
 
-    public static Car Instance { get; private set;}
+    public static Car Instance { get; private set; }
 
     private void Start()
     {
-        _carAria.OnEnter += (col) =>
+        //_carAria.OnEnter += (col) =>
+        //{
+        //    if (_stackFurniture.GetListStack().Count == 0)
+        //        return;
+
+        //    if (col.GetComponent<JoystickPlayer>() == null)
+        //        return;
+
+        //    if (_stackFurniture.GetFurniture() == null || _stackFurniture.GetFurniture().GetName() != _ordersSpawner.RelevantOrder().GetName())
+        //        return;
+
+        //    _ordersSpawner.DestroyOrder();
+
+        //    if (_corutineChair != null)
+        //    {
+        //        StopCoroutine(_corutineChair);
+        //    }
+
+        //    _corutineChair = StartCoroutine(MoveChair());
+        //};
+
+        //_carAria.OnExit += (col) =>
+        //{
+        //    if (_chairs.Count == 0)
+        //        return;
+
+        //    if (_corutine != null)
+        //    {
+        //        StopCoroutine(_corutine);
+        //    }
+
+        //    _corutine = StartCoroutine(MoveCarCoroutine());
+        //};
+    }
+
+    private void OnEnable()
+    {
+        _carAria.OnEnter += WorkEventEnter;
+        _carAria.OnExit += WorkEventExit;
+    }
+
+    private void OnDisable()
+    {
+        _carAria.OnEnter -= WorkEventEnter;
+        _carAria.OnExit -= WorkEventExit;
+    }
+
+    private void WorkEventEnter(Collider collider)
+    {
+        if (_stackFurniture.GetListStack().Count == 0)
+            return;
+
+        if (collider.GetComponent<JoystickPlayer>() == null)
+            return;
+
+        if (_stackFurniture.GetFurniture() == null || _stackFurniture.GetFurniture().GetName() != _ordersSpawner.RelevantOrder().GetName())
+            return;
+
+        _ordersSpawner.DestroyOrder();
+
+        if (_corutineChair != null)
         {
-            if(_stackFurniture.GetListStack().Count == 0) return;
+            StopCoroutine(_corutineChair);
+        }
 
-            if (col.GetComponent<JoystickPlayer>() == null) return;
+        _corutineChair = StartCoroutine(MoveChair());
+    }
 
-            if (_stackFurniture.GetFurniture() == null || _stackFurniture.GetFurniture().GetName() != _ordersSpawner.RelevantOrder().GetName())
-            {
-                //Text
-                return;
-            }
+    private void WorkEventExit(Collider collider)
+    {
+        if (_chairs.Count == 0)
+            return;
 
-            _ordersSpawner.DestroyOrder();
-
-            if (_corutineChair != null)
-            {
-                StopCoroutine(_corutineChair);
-            }
-
-            _corutineChair = StartCoroutine(MoveChair());
-        };
-
-        _carAria.OnExit += (col) =>
+        if (_corutine != null)
         {
-            if(_chairs.Count == 0) return;
+            StopCoroutine(_corutine);
+        }
 
-            if (_corutine != null)
-            {
-                StopCoroutine(_corutine);
-            }
-
-            _corutine = StartCoroutine(MoveCarCoroutine());            
-        };
+        _corutine = StartCoroutine(MoveCarCoroutine());
     }
 
     private IEnumerator MoveChair()
@@ -73,7 +118,6 @@ public class Car : MonoBehaviour
         {
             _relevantFurniture = _stackFurniture.GetFurniture();
 
-            //if (_relevantChair == null) return;
             _stackFurniture.RemoveFurniture(_relevantFurniture, _startPosition);
 
             _chairs.Add(_relevantFurniture);
@@ -108,7 +152,7 @@ public class Car : MonoBehaviour
             yield return null;
         }
 
-        for(int i = 0; i < _countChair; i++)
+        for (int i = 0; i < _countChair; i++)
         {
             _spawnerMoney.CreateMoney();
         }
@@ -118,7 +162,7 @@ public class Car : MonoBehaviour
 
     private void DestroyChair()
     {
-        if(Relevant() == null) return;
+        if (Relevant() == null) return;
 
         Destroy(Relevant().gameObject);
     }

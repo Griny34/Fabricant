@@ -1,8 +1,8 @@
-using Gameplay.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Gameplay.Common;
 using UnityEngine;
 
 public class ShelfLeather : MonoBehaviour
@@ -18,39 +18,70 @@ public class ShelfLeather : MonoBehaviour
     [SerializeField] private float _delay;
 
     private float _elepsedTime = 0;
+    private float _delayCoroutine = 0.5f;
 
     private List<Leather> _pool = new List<Leather>();
     private Leather _relevantLeather;
     private Coroutine _coroutine;
 
-    public event Action OnFull;
+    public event Action OnFilled;
 
     private void Start()
     {
-        _playerTrigger.OnEnter += col =>
-        {
-            if (col.GetComponent<JoystickPlayer>() == null) return;
+        //_playerTrigger.OnEnter += col =>
+        //{
+        //    if (col.GetComponent<JoystickPlayer>() == null)
+        //        return;
 
-            OutDesk();
-        };
+        //    OutDesk();
+        //};
 
-        _playerTrigger.OnExit += col =>
-        {
-            if (_coroutine != null)
-            {
-                StopCoroutine(_coroutine);
-            }
-        };
+        //_playerTrigger.OnExit += col =>
+        //{
+        //    if (_coroutine != null)
+        //    {
+        //        StopCoroutine(_coroutine);
+        //    }
+        //};
 
         Initialize();
     }
+
+    private void OnEnable()
+    {
+        _playerTrigger.OnEnter += WorkEventEnter;
+        _playerTrigger.OnExit += WorkEventExit;
+    }
+
+    private void OnDisable()
+    {
+        _playerTrigger.OnEnter -= WorkEventEnter;
+        _playerTrigger.OnExit -= WorkEventExit;
+    }
+
+    private void WorkEventEnter(Collider collider)
+    {
+        if (collider.GetComponent<JoystickPlayer>() == null)
+            return;
+
+        OutDesk();
+    }
+
+    private void WorkEventExit(Collider collider)
+    {
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+        }
+    }
+
     private void Update()
     {
         _elepsedTime += Time.deltaTime;
 
         if (_elepsedTime >= _delay)
         {
-            if (TryGetGameObject(out Leather desk))
+            if (TryGetLeather(out Leather desk))
             {
                 _elepsedTime = 0;
 
@@ -82,7 +113,7 @@ public class ShelfLeather : MonoBehaviour
         _pool.Add(spawned);
     }
 
-    private bool TryGetGameObject(out Leather result)
+    private bool TryGetLeather(out Leather result)
     {
         result = _pool.FirstOrDefault(p => p.gameObject.activeSelf == false);
 
@@ -95,23 +126,6 @@ public class ShelfLeather : MonoBehaviour
         {
             return null;
         }
-
-        //float minDistance = Mathf.Infinity;
-        //int nearestDeskIndex = 0;
-        //int indexCounter = 0;
-
-        //foreach (Leather desk in _pool)
-        //{
-        //    float distance = Vector3.Distance(desk.transform.position, _player.transform.position);
-
-        //    if (distance < minDistance)
-        //    {
-        //        nearestDeskIndex = indexCounter;
-        //        minDistance = distance;
-        //    }
-
-        //    indexCounter++;
-        //}
 
         return _pool[_pool.Count - 1];
     }
@@ -136,9 +150,9 @@ public class ShelfLeather : MonoBehaviour
             _pool.Remove(_relevantLeather);
 
             Spawn();
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(_delayCoroutine);
         }
 
-        OnFull?.Invoke();
+        OnFilled?.Invoke();
     }
 }

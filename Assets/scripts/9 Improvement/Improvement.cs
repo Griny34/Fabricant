@@ -1,10 +1,7 @@
 using Gameplay.Common;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
 public abstract class Improvement : MonoBehaviour
 {
@@ -59,7 +56,7 @@ public abstract class Improvement : MonoBehaviour
             {
                 gameObject.SetActive(false);
                 _text.gameObject.SetActive(false);
-                ChangeBoolIsOpen();
+                SetAsOpen();
                 Change();
                 _triggerHandler.gameObject.SetActive(true);
             }
@@ -93,10 +90,12 @@ public abstract class Improvement : MonoBehaviour
         return _isOpen;
     }
 
-    protected void ChangeBoolIsOpen()
+    protected void SetAsOpen()
     {
         _isOpen = false;
     }
 
-    protected virtual void Change() {}
+    protected virtual void Change() 
+    {
+    }
 }

@@ -1,8 +1,8 @@
-using Gameplay.Common;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Gameplay.Common;
 using UnityEngine;
 
 public class Сonveyor : MonoBehaviour
@@ -18,39 +18,69 @@ public class Сonveyor : MonoBehaviour
     [SerializeField] private float _delay;
 
     private float _elepsedTime = 0;
+    private float _delayCoroutine = 0.3f;
 
     private List<Board> _pool = new List<Board>();
     private Board _relevantDesk;
     private Coroutine _coroutine;
 
-    public event Action OnFull;
+    public event Action OnFilled;
 
     private void Start()
     {
-        _playerTrigger.OnEnter += col =>
-        {
-            if (col.GetComponent<JoystickPlayer>() == null) return;
+        //_playerTrigger.OnEnter += col =>
+        //{
+        //    if (col.GetComponent<JoystickPlayer>() == null) return;
 
-            OutDesk();
-        };
+        //    OutDesk();
+        //};
 
-        _playerTrigger.OnExit += col =>
-        {
-            if(_coroutine != null)
-            {
-                StopCoroutine(_coroutine);
-            }
-        };
+        //_playerTrigger.OnExit += col =>
+        //{
+        //    if (_coroutine != null)
+        //    {
+        //        StopCoroutine(_coroutine);
+        //    }
+        //};
 
         Initialize();
     }
+
+    private void OnEnable()
+    {
+        _playerTrigger.OnEnter += WorkEventEnter;
+        _playerTrigger.OnExit += WorkEventExit;
+    }
+
+    private void OnDisable()
+    {
+        _playerTrigger.OnEnter -= WorkEventEnter;
+        _playerTrigger.OnExit -= WorkEventExit;
+    }
+
+    private void WorkEventEnter(Collider collider)
+    {
+        if (collider.GetComponent<JoystickPlayer>() == null)
+            return;
+
+        OutDesk();
+    }
+
+    private void WorkEventExit(Collider collider)
+    {
+        if (_coroutine != null)
+        {
+            StopCoroutine(_coroutine);
+        }
+    }
+
     private void Update()
     {
         _elepsedTime += Time.deltaTime;
 
         if (_elepsedTime >= _delay)
         {
-            if (TryGetGameObject(out Board desk))
+            if (TryGetBoard(out Board desk))
             {
                 _elepsedTime = 0;
 
@@ -82,7 +112,7 @@ public class Сonveyor : MonoBehaviour
         _pool.Add(spawned);
     }
 
-    private bool TryGetGameObject(out Board result)
+    private bool TryGetBoard(out Board result)
     {
         result = _pool.FirstOrDefault(p => p.gameObject.activeSelf == false);
 
@@ -137,9 +167,9 @@ public class Сonveyor : MonoBehaviour
             _pool.Remove(_relevantDesk);
 
             Spawn();
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(_delayCoroutine);
         }
 
-        OnFull?.Invoke();
+        OnFilled?.Invoke();
     }
 }

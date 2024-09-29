@@ -10,11 +10,11 @@ public class ImprovmentSpawner : Improvement
     [SerializeField] private Image _imageSpawnFurnitur;
     [SerializeField] private GameObject _tarif;
 
-    private bool _isOpen => PlayerPrefs.GetInt(_keyPrefsBool) != 0;
+    private bool IsOpen => PlayerPrefs.GetInt(_keyPrefsBool) != 0;
 
     private void Start()
     {
-        if (_isOpen)
+        if (IsOpen)
         {
             OpenSpawner();
 
@@ -30,7 +30,7 @@ public class ImprovmentSpawner : Improvement
     {
         PlayerPrefs.SetInt(_keyPrefsCount, GetValueCounter());
 
-        if(GetBoolIsOpen() == false)
+        if (GetBoolIsOpen() == false)
         {
             PlayerPrefs.SetInt(_keyPrefsBool, 1);
         }

@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Order : MonoBehaviour
 {
@@ -13,7 +10,7 @@ public class Order : MonoBehaviour
         return _name;
     }
 
-    public bool GetBool()
+    public bool GetIsOpen()
     {
         return _isOpen;
     }

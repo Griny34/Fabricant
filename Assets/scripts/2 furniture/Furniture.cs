@@ -15,10 +15,10 @@ public class Furniture : MonoBehaviour
   
     public int GiveVolumePrice()
     {
-        return GivePrice();
+        return GetPrice();
     }
 
-    protected virtual int GivePrice()
+    protected virtual int GetPrice()
     {
         return _volumePrice;
     }

@@ -1,57 +1,107 @@
-using Gameplay.Common;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class BedsideSpawner : SpawnerFurniture
 {
     [SerializeField] private BedsideTable _bedsideTable;
 
+    private float _delayCoroutine = 0.5f;
     private Board _boardRelevant;
     private Board _board;
 
-    public override event Action OnStartEffect;
-    public override event Action OnChangeCount;
+    public override event Action OnStartedEffect;
+    public override event Action OnChangedCount;
 
     private void Start()
     {
-        _triggerHandler.OnEnter += col =>
-        {
-            if (col.GetComponent<JoystickPlayer>() == null) return;
+        //_triggerHandler.OnEnter += col =>
+        //{
+        //    if (col.GetComponent<JoystickPlayer>() == null)
+        //        return;
 
-            if (IsOpen == false) return;
+        //    if (IsOpen == false)
+        //        return;
 
-            if (GetCountFurniture() != 0) return;
+        //    if (GetCountFurniture() != 0)
+        //        return;
 
-            if (_stackMaterial.GetListMaterial().Count == 0) return;
+        //    if (_stackMaterial.GetListMaterial().Count == 0)
+        //        return;
 
-            if (SearchMateriale() != null)
-            {
-                if (_coroutine != null)
-                {
-                    StopCoroutine(_coroutine);
-                }
+        //    if (SearchMateriale() != null)
+        //    {
+        //        if (_coroutine != null)
+        //        {
+        //            StopCoroutine(_coroutine);
+        //        }
 
-                _coroutine = StartCoroutine(AcceptMaterial());
-            }
-        };
+        //        _coroutine = StartCoroutine(AcceptMaterial());
+        //    }
+        //};
 
-        _triggerHandler.OnExit += col =>
+        //_triggerHandler.OnExit += col =>
+        //{
+        //    if (_coroutine != null)
+        //    {
+        //        StopCoroutine(_coroutine);
+        //    }
+        //};
+
+        //_ariaSpawner.OnEnter += col =>
+        //{
+        //    if (_stackFurniture.IsFull == true) return;
+
+        //    GivStool();
+        //};
+    }
+
+    private void OnDisable()
+    {
+        _triggerHandler.OnEnter -= WorkEventEnter;
+        _triggerHandler.OnExit -= WorkEventExit;
+        _ariaSpawner.OnEnter -= WorkEventGiveStool;
+    }
+
+    private void WorkEventEnter(Collider collider)
+    {
+        if (collider.GetComponent<JoystickPlayer>() == null)
+            return;
+
+        if (IsOpen == false)
+            return;
+
+        if (GetCountFurniture() != 0)
+            return;
+
+        if (_stackMaterial.GetListMaterial().Count == 0)
+            return;
+
+        if (SearchMateriale() != null)
         {
             if (_coroutine != null)
             {
                 StopCoroutine(_coroutine);
             }
-        };
 
-        _ariaSpawner.OnEnter += col =>
+            _coroutine = StartCoroutine(AcceptMaterial());
+        }
+    }
+
+    private void WorkEventExit(Collider collider)
+    {
+        if (_coroutine != null)
         {
-            if (_stackFurniture.IsFull == true) return;
+            StopCoroutine(_coroutine);
+        }
+    }
 
-            GivStool();
-        };
+    private void WorkEventGiveStool(Collider collider)
+    {
+        if (_stackFurniture.IsFull == true)
+            return;
+
+        GivStool();
     }
 
     protected override void CreatFurniture()
@@ -60,7 +110,7 @@ public class BedsideSpawner : SpawnerFurniture
 
         _furnitures.Add(bedsideTable);
 
-        OnStartEffect?.Invoke();
+        OnStartedEffect?.Invoke();
     }
 
     protected  IEnumerator AcceptMaterial()
@@ -71,11 +121,9 @@ public class BedsideSpawner : SpawnerFurniture
 
             _stackMaterial.RemoveDesk(_boardRelevant, gameObject.transform);
 
-            
-
             _countBoard++;
 
-            OnChangeCount?.Invoke();
+            OnChangedCount?.Invoke();
 
             if (_countBoardsForCreate == _countBoard)
             {
@@ -89,7 +137,7 @@ public class BedsideSpawner : SpawnerFurniture
                 _coroutineAnimation = StartCoroutine(PlayAnimation());
             }
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(_delayCoroutine);
         }
     }
 
@@ -113,7 +161,7 @@ public class BedsideSpawner : SpawnerFurniture
 
         _furnitures[_furnitures.Count - 1].transform.position = _stackFurniture.GetTransform().position;
 
-        _furnitures[_furnitures.Count - 1].gameObject.transform.SetParent(_stackFurniture.transform);//
+        _furnitures[_furnitures.Count - 1].gameObject.transform.SetParent(_stackFurniture.transform);
 
         _stackFurniture.AddFurnitur(_furnitures[_furnitures.Count - 1]);
 
@@ -123,10 +171,10 @@ public class BedsideSpawner : SpawnerFurniture
 
         _countBoard = 0;
 
-        OnChangeCount?.Invoke();
+        OnChangedCount?.Invoke();
     }
 
-    public override int GetCountMatiriale()
+    public override int GetCountMaterial()
     {
         return _countBoard;
     }

@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,16 +7,22 @@ using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
 {
-    public static string Tiger => "Tiger";
-    public static bool IsTiger => PlayerPrefs.GetInt(Tiger, 0) != 0;
+    private const string _tutorialScene = "TutorialScene";
 
     [SerializeField] private TextMeshProUGUI _tigerSaysText;
     [SerializeField] private TextMeshProUGUI[] _tigerSentenceArray;
     [SerializeField] private Button _nextSentenceButton;
-    [SerializeField] private UnityEvent _onEndSay;
+    [SerializeField] private UserInterface _userInterface;
+
+    //[SerializeField] private UnityEvent _onEndSay;
 
     private int _currentSayIndex;
     private float _delay = 1.2f;
+    private int _value = 1;
+
+    public static string Tiger => "Tiger";
+
+    public static bool IsTiger => PlayerPrefs.GetInt(Tiger, 0) != 0;
 
     private void Start()
     {
@@ -37,9 +42,11 @@ public class Tutorial : MonoBehaviour
 
             if (_currentSayIndex >= _tigerSentenceArray.Length)
             {
-                PlayerPrefs.SetInt(Tiger, 1);
+                PlayerPrefs.SetInt(Tiger, _value);
 
-                _onEndSay?.Invoke();
+                //_onEndSay?.Invoke();
+
+                _userInterface.PlayGame();
 
                 StartCoroutine(StartCoroutine());
 
@@ -54,6 +61,6 @@ public class Tutorial : MonoBehaviour
     {
         yield return new WaitForSeconds(_delay);
 
-        SceneManager.LoadScene("TutorialScene");
+        SceneManager.LoadScene(_tutorialScene);
     }
 }

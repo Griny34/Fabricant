@@ -1,19 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
 public class Sound
 {
-    public string Name;
-    public AudioClip Clip;
+    [SerializeField ] private string Name;
+    [SerializeField] private AudioClip Clip;
 
     [Range(0f, 1f)]
-    public float Volume;
+    [SerializeField] private float Volume;
     [Range(1f, 3f)]
-    public float Pitch;
-    public bool Loop;
+    [SerializeField] private float Pitch;
+    [SerializeField] private bool Loop;
 
     [HideInInspector]
-    public AudioSource Source;
+    [SerializeField] private AudioSource Source;
+
+    public AudioClip GetMyAudioClip()
+    {
+        return Clip;
+    }
 }

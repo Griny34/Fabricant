@@ -1,7 +1,7 @@
 using Plugins.Audio.Core;
 using UnityEngine;
 
-public class ControlerPause : MonoBehaviour
+public class PauseController : MonoBehaviour
 {
     [SerializeField] private SourceAudio _sourceAudio;
 
@@ -32,7 +32,7 @@ public class ControlerPause : MonoBehaviour
 
     public void HandlePause()
     {
-        if(_isPaused == false && _outOfFocuse == false)
+        if (_isPaused == false && _outOfFocuse == false)
         {
             _sourceAudio.UnPause();
             Time.timeScale = 1f;
@@ -43,28 +43,7 @@ public class ControlerPause : MonoBehaviour
             Time.timeScale = 0f;
         }
 
-        if(_outOfFocuse == false)
+        if (_outOfFocuse == false)
             _sourceAudio.UnPause();
-    }
-
-    private void Update()
-    {        
-        //Application.ExternalEval("console.log(IsPaused);");
-        //Application.ExternalEval("console.log(OutOfFocuse);");
-    }
-
-    public void StopGame()
-    {
-
-    }
-
-    public void StopTime()
-    {
-
-    }
-
-    public void PlayGame()
-    {
-
     }
 }

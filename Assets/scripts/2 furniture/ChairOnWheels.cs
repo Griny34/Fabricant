@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ChairOnWheels : Furniture
 {
     [SerializeField] private int _price;
 
-    protected override int GivePrice()
+    protected override int GetPrice()
     {
         return _price;
     }

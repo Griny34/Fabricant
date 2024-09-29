@@ -9,12 +9,12 @@ public class StartEffect : MonoBehaviour
 
     private void OnEnable()
     {
-        _spawnerChair.OnStartEffect += PlayEffect;
+        _spawnerChair.OnStartedEffect += PlayEffect;
     }
 
     private void OnDisable()
     {
-        _spawnerChair.OnStartEffect -= PlayEffect;
+        _spawnerChair.OnStartedEffect -= PlayEffect;
     }
 
     private void PlayEffect()

@@ -1,20 +1,19 @@
-using Newtonsoft.Json.Linq;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Money : MonoBehaviour
 {
-    public static Money Instance { get; private set; }
+    private const string _keyPrefsMoney = "money";
 
     [SerializeField] private int _value;
     [SerializeField] private int _upgradeMoney;
 
     private int _startMoney = 10;
 
+    public static Money Instance { get; private set; }
+
     private void Awake()
     {
-        if(Instance != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;
@@ -25,19 +24,14 @@ public class Money : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerPrefs.HasKey("money"))
+        if (PlayerPrefs.HasKey(_keyPrefsMoney))
         {
-            _value = PlayerPrefs.GetInt("money");
+            _value = PlayerPrefs.GetInt(_keyPrefsMoney);
         }
         else
         {
             _value = _startMoney;
         }
-
-        //Upgrade.Instace.OnBuyMoney += () =>
-        //{
-        //    UpgradeMoney();
-        //};
     }
 
     private void OnEnable()
@@ -59,6 +53,6 @@ public class Money : MonoBehaviour
     {
         _value += _upgradeMoney;
 
-        PlayerPrefs.SetInt("money", _value);
+        PlayerPrefs.SetInt(_keyPrefsMoney, _value);
     }
 }

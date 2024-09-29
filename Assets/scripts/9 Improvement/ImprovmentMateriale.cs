@@ -13,11 +13,11 @@ public class ImprovmentMateriale : Improvement
     [SerializeField] private string _keyPrefs;
     [SerializeField] private string _keyPrefsBool;
 
-    private bool _isOpen => PlayerPrefs.GetInt(_keyPrefsBool) != 0;
+    private bool IsOpen => PlayerPrefs.GetInt(_keyPrefsBool) != 0;
 
     private void Start()
     {
-        if (_isOpen)
+        if (IsOpen)
         {
             OpenSpawner();
             return;

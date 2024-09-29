@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Timer : MonoBehaviour
@@ -16,7 +15,7 @@ public class Timer : MonoBehaviour
     {
         _timeLeft = seconds;
 
-        if(_tickCoroutine != null)
+        if (_tickCoroutine != null)
         {
             Stop();
         }

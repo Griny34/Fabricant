@@ -1,6 +1,3 @@
-using Newtonsoft.Json.Linq;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BoxMoney : MonoBehaviour
@@ -13,11 +10,11 @@ public class BoxMoney : MonoBehaviour
         {
             Wallet.Instance.TakeMoney(Money.Instance.GetMoneyValue());
 
-            Wallet.Instance.TakeSalary(Money.Instance.GetMoneyValue());         
+            Wallet.Instance.TakeSalary(Money.Instance.GetMoneyValue());
 
             _particleSystem.Play();
 
             Destroy(gameObject, 0.5f);
         }
-    }   
+    }
 }

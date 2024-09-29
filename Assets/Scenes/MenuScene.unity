@@ -4347,7 +4347,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d89474536453224e91662c35c54b4dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _controlerPause: {fileID: 1744661471}
   _interstishelService: {fileID: 0}
   _rewardService: {fileID: 0}
 --- !u!4 &384875870
@@ -6212,7 +6211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slider: {fileID: 1739340988}
-  _slider2: {fileID: 2051367712}
+  _sliderUnderstudy: {fileID: 2051367712}
   _keyVolume: Volume
   _musicPlayer: {fileID: 536802747}
 --- !u!114 &536802747
