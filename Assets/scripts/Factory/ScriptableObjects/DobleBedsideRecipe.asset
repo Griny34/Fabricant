@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab69942bbd8b6304aba3abac350f633b, type: 3}
+  m_Name: DobleBedsideRecipe
+  m_EditorClassIdentifier: 
+  _countMateriale: 0
+  _materialForImprovement: {fileID: 0}
+  _countFurniture: 2
+  _furnitureForImprovement: {fileID: 914891520422172959, guid: 70a8e3284ddaed04781b170cd76511b8, type: 3}
+  _furnitureFromRecipe: {fileID: -5369871951277237158, guid: 854e8c30fa891f2449965056a0712f02, type: 3}

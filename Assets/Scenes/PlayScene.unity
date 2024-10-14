@@ -2468,7 +2468,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d89474536453224e91662c35c54b4dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _controlerPause: {fileID: 1621967967}
   _interstishelService: {fileID: 1034066187}
   _rewardService: {fileID: 392051067}
 --- !u!4 &113514410
@@ -2781,7 +2780,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pointStartStack: {fileID: 1812206961}
-  _maxCountFurniture: 1
 --- !u!1 &149302733
 GameObject:
   m_ObjectHideFlags: 0
@@ -6391,7 +6389,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerHandler: {fileID: 442618844}
   _spawnerMoney: {fileID: 392051069}
-  _controlerPause: {fileID: 1621967967}
 --- !u!114 &392051068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8074,7 +8071,6 @@ MonoBehaviour:
   _countFurnitureForCreate: 1
   _worker: {fileID: 1691927906}
   _prefabBedside: {fileID: 8448765643950404917, guid: 175c61cae3e4a0a49b344015a93ef420, type: 3}
-  _countDoubleBedsideForCreate: 1
 --- !u!114 &444977788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11291,7 +11287,6 @@ MonoBehaviour:
   _countFurnitureForCreate: 2
   _worker: {fileID: 1970776903}
   _prefabDoubleBedsideTable: {fileID: -5369871951277237158, guid: 854e8c30fa891f2449965056a0712f02, type: 3}
-  _countDoubleBedsideForCreate: 2
 --- !u!114 &658053805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15502,7 +15497,6 @@ MonoBehaviour:
   _countFurnitureForCreate: 1
   _worker: {fileID: 1153960192}
   _prefabArmchair: {fileID: 7119902271882517376, guid: a1d8062f2bb237e47a33a5971e35aa13, type: 3}
-  _countDoubleBedsideForCreate: 1
 --- !u!114 &916052527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17572,6 +17566,7 @@ MonoBehaviour:
   _improvmentMaterialeWheel: {fileID: 52899552}
   _improvmentWareHouse: {fileID: 1076839779}
   _improvmentWareHouse2: {fileID: 1608091384}
+  _upgrade: {fileID: 1123694174}
   onFinishing:
     m_PersistentCalls:
       m_Calls: []
@@ -19848,7 +19843,6 @@ MonoBehaviour:
   _countFurnitureForCreate: 2
   _worker: {fileID: 776095763}
   _prefabTable: {fileID: 5298508662611724313, guid: b8f9284994bd5f84dbc8ef62666c6a5d, type: 3}
-  _countDoubleBedsideForCreate: 2
 --- !u!114 &1132006410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20452,6 +20446,8 @@ GameObject:
   - component: {fileID: 1210240034}
   - component: {fileID: 1210240038}
   - component: {fileID: 1210240039}
+  - component: {fileID: 1210240041}
+  - component: {fileID: 1210240040}
   m_Layer: 0
   m_Name: StoolArea
   m_TagString: Untagged
@@ -20566,7 +20562,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210240032}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a0099b0bb9fa064197a7050401de37d, type: 3}
   m_Name: 
@@ -20595,6 +20591,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stoolSpawner: {fileID: 1210240038}
   _countDesk: {fileID: 1503929992}
+--- !u!114 &1210240040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210240032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23eba31b7dc5a1a408703cdc47cc8672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnerFurniture: {fileID: 1210240041}
+  _stackMaterial: {fileID: 145607021}
+  _stackFurniture: {fileID: 145607022}
+  _triggerHandler: {fileID: 911964226}
+  _ariaSpawner: {fileID: 1210240034}
+  _worker: {fileID: 1228533700}
+  _timeAnimation: 3
+--- !u!114 &1210240041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210240032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 331a7184998aa36498ccc0b32419d39c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _recipe: {fileID: 11400000, guid: 679e49b50e25d0341be9879fd3a73d42, type: 2}
 --- !u!1 &1227462668
 GameObject:
   m_ObjectHideFlags: 0
@@ -34372,7 +34400,6 @@ MonoBehaviour:
   _countFurnitureForCreate: 1
   _worker: {fileID: 2008047980}
   _prefabChairOnWheels: {fileID: 2798135748590348367, guid: fc5f6b42dc90e424ab8251467007e66b, type: 3}
-  _countDoubleBedsideForCreate: 1
 --- !u!114 &2061946869
 MonoBehaviour:
   m_ObjectHideFlags: 0

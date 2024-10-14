@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab69942bbd8b6304aba3abac350f633b, type: 3}
+  m_Name: ArmChairRecipe
+  m_EditorClassIdentifier: 
+  _countMateriale: 4
+  _materialForImprovement: {fileID: -1755006189427694101, guid: 901cf2224774b4b4c91b8dee91f1a8b8, type: 3}
+  _countFurniture: 1
+  _furnitureForImprovement: {fileID: 8448765643950404917, guid: 175c61cae3e4a0a49b344015a93ef420, type: 3}
+  _furnitureFromRecipe: {fileID: 7119902271882517376, guid: a1d8062f2bb237e47a33a5971e35aa13, type: 3}

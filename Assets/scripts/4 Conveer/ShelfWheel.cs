@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class ShelfWheel : MonoBehaviour
 {
+    private const float _delyeCoroutine = 0.5f;
+
     [SerializeField] private TriggerHandler _playerTrigger;
     [SerializeField] private JoystickPlayer _player;
     [SerializeField] private StackMaterial _stack;
@@ -19,7 +21,7 @@ public class ShelfWheel : MonoBehaviour
 
     private float _elepsedTime = 0;
     private float _delayCoroutine = 0.5f;
-
+    private WaitForSeconds _timeCoroutine = new WaitForSeconds(_delyeCoroutine);
     private List<Wheel> _pool = new List<Wheel>();
     private Wheel _relevantLeather;
     private Coroutine _coroutine;
@@ -149,7 +151,7 @@ public class ShelfWheel : MonoBehaviour
             _pool.Remove(_relevantLeather);
 
             Spawn();
-            yield return new WaitForSeconds(_delayCoroutine);
+            yield return _timeCoroutine;
         }
 
         OnFilled?.Invoke();

@@ -5,15 +5,17 @@ using UnityEngine;
 
 public abstract class Improvement : MonoBehaviour
 {
+    private const float _speedBay = 0.001f;
+
     [SerializeField] private TriggerHandler _triggerHandler;
     [SerializeField] private float _delayStartAction;
-    [SerializeField] private float _speedBay;
     [SerializeField] private int _valueBay;
 
     [SerializeField] private int _priseOpen;
     [SerializeField] private TextMeshProUGUI _valueOnText;
     [SerializeField] private GameObject _text;
 
+    private WaitForSeconds _timeCoroutine = new WaitForSeconds(_speedBay);
     private int _valueCounter;
     private Coroutine _coroutine;
 
@@ -61,7 +63,7 @@ public abstract class Improvement : MonoBehaviour
                 _triggerHandler.gameObject.SetActive(true);
             }
 
-            yield return new WaitForSeconds(_speedBay);
+            yield return _timeCoroutine;
         }
     }
 

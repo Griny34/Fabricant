@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class Сonveyor : MonoBehaviour
 {
+    private const float _delyeCoroutine = 0.3f;
+
     [SerializeField] private TriggerHandler _playerTrigger;
     [SerializeField] private JoystickPlayer _player;
     [SerializeField] private StackMaterial _stack;
@@ -18,8 +20,7 @@ public class Сonveyor : MonoBehaviour
     [SerializeField] private float _delay;
 
     private float _elepsedTime = 0;
-    private float _delayCoroutine = 0.3f;
-
+    private WaitForSeconds _timeCoroutine = new WaitForSeconds(_delyeCoroutine);
     private List<Board> _pool = new List<Board>();
     private Board _relevantDesk;
     private Coroutine _coroutine;
@@ -167,7 +168,8 @@ public class Сonveyor : MonoBehaviour
             _pool.Remove(_relevantDesk);
 
             Spawn();
-            yield return new WaitForSeconds(_delayCoroutine);
+
+            yield return _timeCoroutine;
         }
 
         OnFilled?.Invoke();

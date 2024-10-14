@@ -20,54 +20,6 @@ public class ArmchairSpawner : SpawnerFurniture
     public override event Action OnChangedCount;
     public override event Action OnChagedCountFurniture;
 
-    private void Start()
-    {
-        //_triggerHandler.OnEnter += col =>
-        //{
-        //    if (col.GetComponent<JoystickPlayer>() == null)
-        //        return;
-
-        //    if (IsOpen == false)
-        //        return;
-
-        //    if (SearchMateriale() != null)
-        //    {
-        //        if (_coroutine != null)
-        //        {
-        //            StopCoroutine(_coroutine);
-        //        }
-
-        //        _coroutine = StartCoroutine(AcceptMaterial());
-        //    }
-
-        //    if (SearchChair() != null)
-        //    {
-        //        if (_coroutineAcceptFurniture != null)
-        //        {
-        //            StopCoroutine(_coroutineAcceptFurniture);
-        //        }
-
-        //        _coroutineAcceptFurniture = StartCoroutine(AcceptFurniture());
-        //    }
-        //};
-
-        //_triggerHandler.OnExit += col =>
-        //{
-        //    if (_coroutine != null)
-        //    {
-        //        StopCoroutine(_coroutine);
-        //    }
-        //};
-
-        //_ariaSpawner.OnEnter += col =>
-        //{
-        //    if (_stackFurniture.IsFull == true)
-        //        return;
-
-        //    GivStool();
-        //};
-    }
-
     private void OnEnable()
     {
         _triggerHandler.OnEnter += WorkEventEnter;

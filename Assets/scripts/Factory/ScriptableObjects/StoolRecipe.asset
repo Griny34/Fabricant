@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab69942bbd8b6304aba3abac350f633b, type: 3}
+  m_Name: StoolRecipe
+  m_EditorClassIdentifier: 
+  _countMateriale: 3
+  _materialForImprovement: {fileID: 6647984569623487454, guid: 0fbcca257ed5fdd4da94d4c66c9ba230, type: 3}
+  _countFurniture: 1
+  _furnitureForImprovement: {fileID: 0}
+  _furnitureFromRecipe: {fileID: 1354491132872772486, guid: 4e41b766eeb5e614f93535a52b41df49, type: 3}

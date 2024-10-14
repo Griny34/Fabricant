@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Trashcan : MonoBehaviour
 {
+    private const float _delyeCoroutine = 0.5f;
+
     [SerializeField] private TriggerHandler _triggerHandler;
     [SerializeField] private StackMaterial _stackMaterial;
     [SerializeField] private StackFurniture _stackFurniture;
 
-    private float _delayCoroutine = 0.5f;
+    private WaitForSeconds _timeCoroutine = new WaitForSeconds(_delyeCoroutine);
     private Coroutine _coroutine;
     private Material _material;
     private Furniture _furniture;
@@ -72,7 +74,7 @@ public class Trashcan : MonoBehaviour
 
             _stackMaterial.RemoveDesk(_material, gameObject.transform);
 
-            yield return new WaitForSeconds(_delayCoroutine);
+            yield return _timeCoroutine;
         }
 
         while (_stackFurniture.GetListStack().Count != 0)
@@ -81,7 +83,7 @@ public class Trashcan : MonoBehaviour
 
             _stackFurniture.RemoveFurniture(_furniture, gameObject.transform);
 
-            yield return new WaitForSeconds(_delayCoroutine);
+            yield return _timeCoroutine;
         }
     }
 }

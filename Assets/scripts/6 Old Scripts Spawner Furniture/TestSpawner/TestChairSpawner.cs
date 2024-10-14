@@ -1,71 +1,25 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class ChairSpawner : SpawnerFurniture
+public class TestArmchairSpawner : TestSpawnerFurniture
 {
-    private const string _animatinWork = "Work";
+    private const string _animationWork = "Work";
 
-    [SerializeField] private Chair _prefabBedside;
+    [SerializeField] private Armchair _prefabArmchair;
 
     private float _delayCoroutine = 0.5f;
     private float _timeAnimation = 3f;
-    private Stool _stoolRelevant;
-    private Stool _stool;
-    private Board _boardRelevant;
-    private Board _board;
+    private Chair _chairRelevant;
+    private Chair _chair;
+    private Leather _leatherRelevant;
+    private Leather _leather;
     private Coroutine _coroutineAcceptFurniture;
 
     public override event Action OnStartedEffect;
     public override event Action OnChangedCount;
     public override event Action OnChagedCountFurniture;
-
-    private void Start()
-    {
-        //_triggerHandler.OnEnter += col =>
-        //{
-        //    if (col.GetComponent<JoystickPlayer>() == null)
-        //        return;
-
-        //    if (IsOpen == false)
-        //        return;
-
-        //    if (SearchMateriale() != null)
-        //    {
-        //        if (_coroutine != null)
-        //        {
-        //            StopCoroutine(_coroutine);
-        //        }
-
-        //        _coroutine = StartCoroutine(AcceptMaterial());
-        //    }           
-
-        //    if (SearchStool() != null)
-        //    {
-        //        if (_coroutineAcceptFurniture != null)
-        //        {
-        //            StopCoroutine(_coroutineAcceptFurniture);
-        //        }
-
-        //        _coroutineAcceptFurniture = StartCoroutine(AcceptFurniture());
-        //    }
-        //};
-
-        _triggerHandler.OnExit += col =>
-        {
-            if (_coroutine != null)
-            {
-                StopCoroutine(_coroutine);
-            }
-        };
-
-        _ariaSpawner.OnEnter += col =>
-        {
-            if (_stackFurniture.IsFull == true) return;
-
-            GivStool();          
-        };
-    }
 
     private void OnEnable()
     {
@@ -99,7 +53,7 @@ public class ChairSpawner : SpawnerFurniture
             _coroutine = StartCoroutine(AcceptMaterial());
         }
 
-        if (SearchStool() != null)
+        if (SearchChair() != null)
         {
             if (_coroutineAcceptFurniture != null)
             {
@@ -126,12 +80,11 @@ public class ChairSpawner : SpawnerFurniture
         GivStool();
     }
 
-
     protected override void CreatFurniture()
     {
-        Chair chair = Instantiate(_prefabBedside, _pointSpawner.position, Quaternion.identity);
+        Armchair armchair = Instantiate(_prefabArmchair, _pointSpawner.position, Quaternion.identity);
 
-        _furnitures.Add(chair);
+        _furnitures.Add(armchair);
 
         OnStartedEffect?.Invoke();
     }
@@ -140,15 +93,15 @@ public class ChairSpawner : SpawnerFurniture
     {
         while (_stackFurniture.GetListStack().Count != 0 && _countFurnitureForCreate != _countFurniture)
         {
-            _stoolRelevant = SearchStool();
+            _chairRelevant = SearchChair();
 
-            _stackFurniture.RemoveFurniture(_stoolRelevant, gameObject.transform);
+            _stackFurniture.RemoveFurniture(_chairRelevant, gameObject.transform);
 
             yield return new WaitForSeconds(_delayCoroutine);
 
             _countFurniture++;
 
-            OnChagedCountFurniture?.Invoke();         
+            OnChagedCountFurniture?.Invoke();
 
             if (_countBoardsForCreate == _countBoard && _countFurnitureForCreate == _countFurniture)
             {
@@ -168,9 +121,9 @@ public class ChairSpawner : SpawnerFurniture
     {
         while (_stackMaterial.GetListMaterial().Count != 0 && _countBoardsForCreate != _countBoard)
         {
-            _boardRelevant = SearchMateriale();
+            _leatherRelevant = SearchMateriale();
 
-            _stackMaterial.RemoveDesk(_boardRelevant, gameObject.transform);           
+            _stackMaterial.RemoveDesk(_leatherRelevant, gameObject.transform);
 
             _countBoard++;
 
@@ -187,9 +140,9 @@ public class ChairSpawner : SpawnerFurniture
 
                 _coroutineAnimation = StartCoroutine(PlayAnimation());
             }
+
             yield return new WaitForSeconds(_delayCoroutine);
         }
-
 
         if (_countBoardsForCreate == _countBoard)
         {
@@ -208,64 +161,64 @@ public class ChairSpawner : SpawnerFurniture
 
         while (_isAnimationPlay != false)
         {
-            _worker.SetBool(_animatinWork, _isAnimationPlay);
+            _worker.SetBool(_animationWork, _isAnimationPlay);
 
             yield return new WaitForSeconds(_timeAnimation);
 
             _isAnimationPlay = false;
 
-            _worker.SetBool(_animatinWork, _isAnimationPlay);
+            _worker.SetBool(_animationWork, _isAnimationPlay);
 
             CreatFurniture();
         }
     }
 
-    private Board SearchMateriale()
+    private Leather SearchMateriale()
     {
         foreach (var materiale in _stackMaterial.GetListMaterial())
         {
-            if (materiale is Board)
+            if (materiale is Leather)
             {
-                _board = (Board)materiale;
-                return _board;
+                _leather = (Leather)materiale;
+                return _leather;
             }
         }
 
         return null;
     }
 
-    private Stool SearchStool()
+    private Chair SearchChair()
     {
         foreach (var furniture in _stackFurniture.GetListStack())
         {
-            if (furniture is Stool)
+            if (furniture is Chair)
             {
-                _stool = (Stool)furniture;
-                return _stool;
+                _chair = (Chair)furniture;
+                return _chair;
             }
         }
 
         return null;
     }
 
-    protected override void GivStool()
-    {
-        if (_furnitures.Count == 0) return;
+    //protected override void GivStool()
+    //{
+    //    if (_furnitures.Count == 0) return;
 
-        _furnitures[_furnitures.Count - 1].transform.position = _stackFurniture.GetTransform().position;
+    //    _furnitures[_furnitures.Count - 1].transform.position = _stackFurniture.GetTransform().position;
 
-        _furnitures[_furnitures.Count - 1].gameObject.transform.SetParent(_stackFurniture.transform);
+    //    _furnitures[_furnitures.Count - 1].gameObject.transform.SetParent(_stackFurniture.transform);
 
-        _stackFurniture.AddFurnitur(_furnitures[_furnitures.Count - 1]);
+    //    _stackFurniture.AddFurnitur(_furnitures[_furnitures.Count - 1]);
 
-        _furnitures.Remove(_furnitures[_furnitures.Count - 1]);
+    //    _furnitures.Remove(_furnitures[_furnitures.Count - 1]);
 
-        IsOpen = true;
+    //    IsOpen = true;
 
-        _countBoard = 0;
-        _countFurniture = 0;
+    //    _countBoard = 0;
+    //    _countFurniture = 0;
 
-        OnChangedCount?.Invoke();
-        OnChagedCountFurniture?.Invoke();
-    }
+    //    OnChangedCount?.Invoke();
+    //    OnChagedCountFurniture?.Invoke();
+    //}
 }

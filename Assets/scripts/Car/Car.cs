@@ -1,11 +1,12 @@
-using Gameplay.Common;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime;
+using Gameplay.Common;
 using UnityEngine;
 
 public class Car : MonoBehaviour
 {
+    private const float _delyeCoroutine = 1f;
+
     [Header("General properties")]
     [SerializeField] private int _maxCountChair;
     [SerializeField] private float _speed;
@@ -21,6 +22,7 @@ public class Car : MonoBehaviour
 
     [SerializeField] private Transform _startPosition;
 
+    private WaitForSeconds _timeCoroutine = new WaitForSeconds(_delyeCoroutine);
     private List<Furniture> _chairs = new List<Furniture>();
     private Furniture _relevantFurniture;
     private Coroutine _corutine;
@@ -86,7 +88,8 @@ public class Car : MonoBehaviour
         if (collider.GetComponent<JoystickPlayer>() == null)
             return;
 
-        if (_stackFurniture.GetFurniture() == null || _stackFurniture.GetFurniture().GetName() != _ordersSpawner.RelevantOrder().GetName())
+        if (_stackFurniture.GetFurniture() == null
+            || _stackFurniture.GetFurniture().GetName() != _ordersSpawner.RelevantOrder().GetName())
             return;
 
         _ordersSpawner.DestroyOrder();
@@ -122,7 +125,7 @@ public class Car : MonoBehaviour
 
             _chairs.Add(_relevantFurniture);
 
-            yield return new WaitForSeconds(1f);
+            yield return _timeCoroutine;
 
             _countChair = _relevantFurniture.GiveVolumePrice();
 
@@ -136,7 +139,7 @@ public class Car : MonoBehaviour
 
         _chairs.Clear();
 
-        yield return new WaitForSeconds(0.6f);
+        yield return _timeCoroutine;
 
         while (transform.position != _positionShop.position)
         {
@@ -144,7 +147,7 @@ public class Car : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(1);
+        yield return _timeCoroutine;
 
         while (transform.position != _startPosition.position)
         {

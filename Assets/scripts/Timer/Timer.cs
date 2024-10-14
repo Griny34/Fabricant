@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
+    private const float _delyeCoroutine = 1f;
+
+    private WaitForSeconds _timeCoroutine = new WaitForSeconds(_delyeCoroutine);
     private int _timeLeft;
     private IEnumerator _tickCoroutine;
 
@@ -41,7 +44,7 @@ public class Timer : MonoBehaviour
         {
             _timeLeft--;
             OnTick?.Invoke(_timeLeft);
-            yield return new WaitForSeconds(1f);
+            yield return _timeCoroutine;
         }
 
         OnDone?.Invoke();

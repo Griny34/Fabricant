@@ -59,7 +59,9 @@ public class OrdersSpawner : MonoBehaviour
 
         while (RelevantOrder().transform.position != _pointFinish.position)
         {
-            RelevantOrder().transform.position = Vector3.MoveTowards(RelevantOrder().transform.position, _pointFinish.position, _speed * Time.deltaTime);
+            RelevantOrder()
+                .transform.position = Vector3
+                .MoveTowards(RelevantOrder().transform.position, _pointFinish.position, _speed * Time.deltaTime);
 
             yield return null;
         }

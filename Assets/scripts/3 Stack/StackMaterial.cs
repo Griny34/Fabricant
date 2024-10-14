@@ -41,7 +41,8 @@ public class StackMaterial : MonoBehaviour
     {
         _inventoryMateriale.Add(material);
 
-        material.transform.DOJump(_pointStartStack.position + new Vector3(0, 0.025f + _number, 0), _powerJump, _numberJumps, _delay).OnComplete(() =>
+        material.transform
+            .DOJump(_pointStartStack.position + new Vector3(0, 0.025f + _number, 0), _powerJump, _numberJumps, _delay).OnComplete(() =>
             {
                 material.transform.SetParent(_pointStartStack.transform, true);
                 material.transform.localPosition = new Vector3(0, 0.025f + _number, 0);
