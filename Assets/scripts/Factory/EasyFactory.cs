@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Gameplay.Common;
+using Player;
 
 namespace Factory
 {
@@ -49,6 +50,11 @@ namespace Factory
             _ariaSpawner.OnEnter -= WorkEventGiveStool;
         }
 
+        public int GetCountMateriale()
+        {
+            return _countMateriale;
+        }
+
         private void WorkEventEnter(Collider collider)
         {
             if (collider.GetComponent<JoystickPlayer>() == null)
@@ -66,11 +72,6 @@ namespace Factory
 
                 _coroutine = StartCoroutine(AcceptMaterial());
             }
-        }
-
-        public int GetCountMateriale()
-        {
-            return _countMateriale;
         }
 
         private void WorkEventExit(Collider collider)

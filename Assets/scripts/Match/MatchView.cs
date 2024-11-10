@@ -1,40 +1,28 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using WalletUser;
 
 public class MatchView : MonoBehaviour
 {
     [Header("Model")]
     [SerializeField] private MatchModel _matchModel;
+    [SerializeField] private Wallet _wallet;
 
-    [Header("UIPlayer")]
-    [SerializeField] private TextMeshProUGUI _playerProgress2;
+    //[Header("UIPlayer")]
+    //[SerializeField] private TextMeshProUGUI _playerProgress;
 
-    private void Start()
+    private void OnEnable()
     {
-        Wallet.Instance.OnMoneyChanged += value =>
-        {
-            _playerProgress2.text = Wallet.Instance.GetMoney().ToString();
-        };
-
-        //_enemyFirst.OnMoneyChanged += value =>
-        //{
-        //    UpdateUI(_enemyFirstProgress.text, _enemyFirst.GetMoneyEnemy());
-        //    UpdateUI(_enemyFirstProgress2.text, _enemyFirst.GetMoneyEnemy());
-        //};
-
-        //_enemySecond.OnMoneyChanged += value =>
-        //{
-        //    UpdateUI(_enemySecondProgress.text, _enemySecond.GetMoneyEnemy());
-        //    UpdateUI(_enemySecondProgress2.text, _enemySecond.GetMoneyEnemy());
-        //};
+        _wallet.OnMoneyChanged += UpdateUI;
     }
 
-    private void UpdateUI(string text, int value)
+    private void OnDisable()
     {
-        text = value.ToString();
+        _wallet.OnMoneyChanged -= UpdateUI;
+    }
+
+    private void UpdateUI(int money)
+    {
+        //_playerProgress.text = _wallet.GetMoney().ToString();
     }
 }

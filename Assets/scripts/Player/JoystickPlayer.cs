@@ -1,127 +1,147 @@
+using Agava.WebUtility;
 using UnityEngine;
+using UpgradeSkills;
 
-public class JoystickPlayer : MonoBehaviour
+namespace Player
 {
-    private const string _keyPrefsSpeed = "Speed";
-    private const string _animationVelocity = "Velocity";
-    private const string _horizontal = "Horizontal";
-    private const string _vertical = "Vertical";
-
-    [SerializeField] private bool _isMobile;
-    [SerializeField] private Rigidbody _rigidbody;
-    [SerializeField] private DynamicJoystick _joystickLandscape;
-    [SerializeField] private Animator _animator;
-
-    [SerializeField] private float _speed;
-    [SerializeField] private float _upgradeSpeed;
-    [SerializeField] private float _speedRotation;
-
-    [SerializeField] private float _acceleration;
-    [SerializeField] private float _deceleration;
-
-
-    private int _velocityHash = 0;
-    private Vector3 _startPosition;
-
-    private void Awake()
+    public class JoystickPlayer : MonoBehaviour
     {
-        _startPosition = transform.position;
-    }
+        private const string _keyPrefsSpeed = "Speed";
+        private const string _animationVelocity = "Velocity";
+        private const string _horizontal = "Horizontal";
+        private const string _vertical = "Vertical";
 
-    private void Start()
-    {
-        if (PlayerPrefs.HasKey(_keyPrefsSpeed))
+        [SerializeField] private bool _isMobile;
+        [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private DynamicJoystick _joystickLandscape;
+        [SerializeField] private Animator _animator;
+
+        [SerializeField] private float _speed;
+        [SerializeField] private float _upgradeSpeed;
+        [SerializeField] private float _speedRotation;
+
+        [SerializeField] private float _acceleration;
+        [SerializeField] private float _deceleration;
+        [SerializeField] private Upgrade _upgrade;
+        [SerializeField] private MatchModel _matchModel;
+
+        private int _velocityHash = 0;
+        private Vector3 _startPosition;
+
+        private void Awake()
         {
-            _speed = PlayerPrefs.GetFloat(_keyPrefsSpeed);
+            _startPosition = transform.position;
         }
-       
-        _rigidbody = GetComponent<Rigidbody>();
 
-        _velocityHash = Animator.StringToHash(_animationVelocity);
+        private void Start()
+        {
+            if (PlayerPrefs.HasKey(_keyPrefsSpeed))
+            {
+                _speed = PlayerPrefs.GetFloat(_keyPrefsSpeed);
+            }
 
-        MatchModel.Instace.OnFinished += () =>
+            _rigidbody = GetComponent<Rigidbody>();
+
+            _velocityHash = Animator.StringToHash(_animationVelocity);
+        }
+
+        private void OnEnable()
+        {
+            _matchModel.OnFinished += ReturOnStartPosition;
+            _upgrade.OnBuySpeedPlayer += UpgradePlayer;
+        }
+
+        private void OnDisable()
+        {
+            _matchModel.OnFinished -= ReturOnStartPosition;
+            _upgrade.OnBuySpeedPlayer -= UpgradePlayer;
+        }
+
+        private void ReturOnStartPosition()
         {
             transform.position = _startPosition;
-        };
+        }
 
-        Upgrade.Instace.OnBuySpeedPlayer += () =>
+        private void UpgradePlayer()
         {
             _speed += _upgradeSpeed;
 
             PlayerPrefs.SetFloat(_keyPrefsSpeed, _speed);
-        };       
-    }
+        }
 
-    private void FixedUpdate()
-    {
+        private void FixedUpdate()
+        {
 #if !UNITY_EDITOR && UNITY_WEBGL
         _isMobile = Device.IsMobile;
 #endif
 
-        if (_isMobile)
-        {
-            _joystickLandscape.gameObject.SetActive(true);
+            if (_isMobile)
+            {
+                _joystickLandscape.gameObject.SetActive(true);
 
-            MovePlayer(_joystickLandscape);
-        }
-        else
-        {
-            _joystickLandscape.gameObject.SetActive(false);
+                MovePlayer(_joystickLandscape);
+            }
+            else
+            {
+                _joystickLandscape.gameObject.SetActive(false);
 
-            MovePlayer();
-        }
-    }
-
-    private void MovePlayer()
-    {
-        float horizontal = Input.GetAxis(_horizontal);
-        float vertical = Input.GetAxis(_vertical);
-
-        Vector3 direction = new Vector3(horizontal, 0, vertical);
-
-        if (direction.magnitude > Mathf.Abs(0.01f))
-        {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * _speedRotation);
+                MovePlayer();
+            }
         }
 
-        _animator.SetFloat(_velocityHash, _rigidbody.velocity.magnitude);
-        _rigidbody.velocity = Vector3.ClampMagnitude(direction, 1) * _speed;
-
-        if (_rigidbody.velocity.magnitude <= 0.05f)
+        private void MovePlayer()
         {
-            _rigidbody.angularVelocity = Vector3.zero;
+            float horizontal = Input.GetAxis(_horizontal);
+            float vertical = Input.GetAxis(_vertical);
+
+            Vector3 direction = new Vector3(horizontal, 0, vertical);
+
+            if (direction.magnitude > Mathf.Abs(0.01f))
+            {
+                transform.rotation = Quaternion
+                    .Lerp(transform.rotation, Quaternion.LookRotation(direction)
+                    , Time.deltaTime * _speedRotation);
+            }
+
+            _animator.SetFloat(_velocityHash, _rigidbody.velocity.magnitude);
+            _rigidbody.velocity = Vector3.ClampMagnitude(direction, 1) * _speed;
+
+            if (_rigidbody.velocity.magnitude <= 0.05f)
+            {
+                _rigidbody.angularVelocity = Vector3.zero;
+            }
+            else
+            {
+                transform.rotation = Quaternion.LookRotation(_rigidbody.velocity);
+            }
         }
-        else
+
+        private void MovePlayer(DynamicJoystick joystick)
         {
-            transform.rotation = Quaternion.LookRotation(_rigidbody.velocity);
+            _rigidbody.velocity = new Vector3(joystick.Horizontal * _speed, _rigidbody.velocity.y, joystick.Vertical * _speed);
+
+            _animator.SetFloat(_velocityHash, _rigidbody.velocity.magnitude);
+
+            Vector3 direction = _rigidbody.velocity;
+
+            if (_rigidbody.velocity.magnitude <= 0.05f)
+            {
+                _rigidbody.angularVelocity = Vector3.zero;
+            }
+            else
+            {
+                Rotate(direction);
+            }
         }
-    }
 
-    private void MovePlayer(DynamicJoystick joystick)
-    {
-        _rigidbody.velocity = new Vector3(joystick.Horizontal * _speed, _rigidbody.velocity.y, joystick.Vertical * _speed);
-
-        _animator.SetFloat(_velocityHash, _rigidbody.velocity.magnitude);
-
-        Vector3 direction = _rigidbody.velocity;
-        
-        if (_rigidbody.velocity.magnitude <= 0.05f)
+        private void Rotate(Vector3 direction)
         {
-            _rigidbody.angularVelocity = Vector3.zero;
+            if (direction.sqrMagnitude < 0.1f)
+                return;
+
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+            _rigidbody.MoveRotation(targetRotation);
         }
-        else
-        {
-            Rotate(direction);
-        }
-    }
-
-    private void Rotate( Vector3 direction)
-    {
-        if (direction.sqrMagnitude < 0.1f)
-            return;
-
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-
-        _rigidbody.MoveRotation(targetRotation);
     }
 }

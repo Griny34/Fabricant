@@ -15,5 +15,5 @@ MonoBehaviour:
   _countMateriale: 5
   _materialForImprovement: {fileID: -209988181587409949, guid: 2880f866c1fb0ec4780b39febd9cd884, type: 3}
   _countFurniture: 1
-  _furnitureForImprovement: {fileID: 7119902271882517376, guid: a1d8062f2bb237e47a33a5971e35aa13, type: 3}
-  _furnitureFromRecipe: {fileID: 2798135748590348367, guid: fc5f6b42dc90e424ab8251467007e66b, type: 3}
+  _furnitureForImprovement: {fileID: 6505710267307030332, guid: a1d8062f2bb237e47a33a5971e35aa13, type: 3}
+  _furnitureFromRecipe: {fileID: 6278855750756209762, guid: fc5f6b42dc90e424ab8251467007e66b, type: 3}

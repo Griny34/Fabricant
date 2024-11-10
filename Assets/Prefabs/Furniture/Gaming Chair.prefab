@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4232226206304732791}
   - component: {fileID: 942440735107156434}
   - component: {fileID: 3094201174807248152}
-  - component: {fileID: 2798135748590348367}
+  - component: {fileID: 6278855750756209762}
   m_Layer: 0
   m_Name: Gaming Chair
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2798135748590348367
+--- !u!114 &6278855750756209762
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,8 +93,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 3598433153013046477}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62123d10d81af644381fa5ab33bfda54, type: 3}
+  m_Script: {fileID: 11500000, guid: d20578e3ea7c98e469ab1ca9dc206673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: ChairOnWheels
+  _name: ChairOnWheel
   _price: 10

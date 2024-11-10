@@ -16,4 +16,4 @@ MonoBehaviour:
   _materialForImprovement: {fileID: 6647984569623487454, guid: 0fbcca257ed5fdd4da94d4c66c9ba230, type: 3}
   _countFurniture: 0
   _furnitureForImprovement: {fileID: 0}
-  _furnitureFromRecipe: {fileID: 914891520422172959, guid: 70a8e3284ddaed04781b170cd76511b8, type: 3}
+  _furnitureFromRecipe: {fileID: -6045451485602461773, guid: 70a8e3284ddaed04781b170cd76511b8, type: 3}

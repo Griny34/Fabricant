@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Gameplay.Common;
 using UnityEngine;
+using Orders;
+using Player;
+using Currency;
 
 public class Car : MonoBehaviour
 {
@@ -28,45 +31,6 @@ public class Car : MonoBehaviour
     private Coroutine _corutine;
     private Coroutine _corutineChair;
     private int _countChair;
-
-    public static Car Instance { get; private set; }
-
-    private void Start()
-    {
-        //_carAria.OnEnter += (col) =>
-        //{
-        //    if (_stackFurniture.GetListStack().Count == 0)
-        //        return;
-
-        //    if (col.GetComponent<JoystickPlayer>() == null)
-        //        return;
-
-        //    if (_stackFurniture.GetFurniture() == null || _stackFurniture.GetFurniture().GetName() != _ordersSpawner.RelevantOrder().GetName())
-        //        return;
-
-        //    _ordersSpawner.DestroyOrder();
-
-        //    if (_corutineChair != null)
-        //    {
-        //        StopCoroutine(_corutineChair);
-        //    }
-
-        //    _corutineChair = StartCoroutine(MoveChair());
-        //};
-
-        //_carAria.OnExit += (col) =>
-        //{
-        //    if (_chairs.Count == 0)
-        //        return;
-
-        //    if (_corutine != null)
-        //    {
-        //        StopCoroutine(_corutine);
-        //    }
-
-        //    _corutine = StartCoroutine(MoveCarCoroutine());
-        //};
-    }
 
     private void OnEnable()
     {
@@ -127,7 +91,7 @@ public class Car : MonoBehaviour
 
             yield return _timeCoroutine;
 
-            _countChair = _relevantFurniture.GiveVolumePrice();
+            _countChair = _relevantFurniture.GetVolumePrice();
 
             yield return null;
         }
@@ -143,7 +107,11 @@ public class Car : MonoBehaviour
 
         while (transform.position != _positionShop.position)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _positionShop.position, _speed * Time.deltaTime);
+            transform.position = Vector3
+                .MoveTowards(
+                transform.position,
+                _positionShop.position,
+                _speed * Time.deltaTime);
             yield return null;
         }
 
@@ -151,7 +119,11 @@ public class Car : MonoBehaviour
 
         while (transform.position != _startPosition.position)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _startPosition.position, _speed * Time.deltaTime);
+            transform.position = Vector3
+                .MoveTowards(
+                transform.position,
+                _startPosition.position,
+                _speed * Time.deltaTime);
             yield return null;
         }
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3401092215184549304}
   - component: {fileID: 637237427848286578}
   - component: {fileID: 3527071115880217598}
-  - component: {fileID: 7119902271882517376}
+  - component: {fileID: 6505710267307030332}
   m_Layer: 0
   m_Name: Single Sofa
   m_TagString: Untagged
@@ -99,7 +99,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8932624391330842820, guid: 57d3702421c448743a4b6c659f271993, type: 3}
---- !u!114 &7119902271882517376
+--- !u!114 &6505710267307030332
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1429629412471779495}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18678ec55715d2e49a53e030f21e6ca9, type: 3}
+  m_Script: {fileID: 11500000, guid: d20578e3ea7c98e469ab1ca9dc206673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Armchair

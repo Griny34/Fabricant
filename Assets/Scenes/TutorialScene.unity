@@ -1480,21 +1480,7 @@ MonoBehaviour:
   - {fileID: 1185328813}
   - {fileID: 1322516653}
   _nextSentenceButton: {fileID: 1862969493}
-  _onEndSay:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1715755206}
-        m_TargetAssemblyTypeName: UserInterface, Assembly-CSharp
-        m_MethodName: PlayGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _userInterface: {fileID: 1715755206}
 --- !u!4 &796077287
 Transform:
   m_ObjectHideFlags: 0

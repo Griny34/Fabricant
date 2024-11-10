@@ -1,58 +1,50 @@
 using UnityEngine;
+using UpgradeSkills;
 
-public class Money : MonoBehaviour
+namespace Currency
 {
-    private const string _keyPrefsMoney = "money";
-
-    [SerializeField] private int _value;
-    [SerializeField] private int _upgradeMoney;
-
-    private int _startMoney = 10;
-
-    public static Money Instance { get; private set; }
-
-    private void Awake()
+    public class Money : MonoBehaviour
     {
-        if (Instance != null)
+        private const string _keyPrefsMoney = "money";
+
+        [SerializeField] private int _value;
+        [SerializeField] private int _upgradeMoney;
+        [SerializeField] private Upgrade _upgrade;
+
+        private int _startMoney = 10;
+
+        private void Start()
         {
-            Destroy(gameObject);
-            return;
+            if (PlayerPrefs.HasKey(_keyPrefsMoney))
+            {
+                _value = PlayerPrefs.GetInt(_keyPrefsMoney);
+            }
+            else
+            {
+                _value = _startMoney;
+            }
         }
 
-        Instance = this;
-    }
-
-    private void Start()
-    {
-        if (PlayerPrefs.HasKey(_keyPrefsMoney))
+        private void OnEnable()
         {
-            _value = PlayerPrefs.GetInt(_keyPrefsMoney);
+            _upgrade.OnBuyMoney += UpgradeMoney;
         }
-        else
+
+        private void OnDisable()
         {
-            _value = _startMoney;
+            _upgrade.OnBuyMoney -= UpgradeMoney;
         }
-    }
 
-    private void OnEnable()
-    {
-        Upgrade.Instace.OnBuyMoney += UpgradeMoney;
-    }
+        public int GetMoneyValue()
+        {
+            return _value;
+        }
 
-    private void OnDisable()
-    {
-        Upgrade.Instace.OnBuyMoney -= UpgradeMoney;
-    }
+        private void UpgradeMoney()
+        {
+            _value += _upgradeMoney;
 
-    public int GetMoneyValue()
-    {
-        return _value;
-    }
-
-    private void UpgradeMoney()
-    {
-        _value += _upgradeMoney;
-
-        PlayerPrefs.SetInt(_keyPrefsMoney, _value);
+            PlayerPrefs.SetInt(_keyPrefsMoney, _value);
+        }
     }
 }

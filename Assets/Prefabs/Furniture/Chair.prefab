@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4741570120965307908}
   - component: {fileID: 7361564250993511118}
   - component: {fileID: 6777011169824694338}
-  - component: {fileID: 8448765643950404917}
+  - component: {fileID: -2961300624092349707}
   m_Layer: 0
   m_Name: Chair
   m_TagString: Untagged
@@ -99,7 +99,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1829674632409497679, guid: c422d27e2368c32409ba9ce11e2a79fc, type: 3}
---- !u!114 &8448765643950404917
+--- !u!114 &-2961300624092349707
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9018875926175378203}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32b055f64399c474cbfe1c769db33efe, type: 3}
+  m_Script: {fileID: 11500000, guid: d20578e3ea7c98e469ab1ca9dc206673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _name: Chair

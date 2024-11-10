@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1020216104545402274}
   - component: {fileID: 3011921260165679464}
   - component: {fileID: 1290630954052805604}
-  - component: {fileID: -5369871951277237158}
+  - component: {fileID: 1952341165001988994}
   m_Layer: 0
   m_Name: DoubleBedside
   m_TagString: Untagged
@@ -99,7 +99,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -459331691245565471, guid: 0dc1d5963e0fa8d4e82451da430abe93, type: 3}
---- !u!114 &-5369871951277237158
+--- !u!114 &1952341165001988994
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,7 +108,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3660443660714043581}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29a8088612eef0f488468746367174d5, type: 3}
+  m_Script: {fileID: 11500000, guid: d20578e3ea7c98e469ab1ca9dc206673, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _name: DoubleBedside

@@ -131,6 +131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particleSystem: {fileID: 2476935909218757716}
+  _wallet: {fileID: 0}
+  _money: {fileID: 2773470238511209116, guid: 8c12985ad708de449b2772e974cf1c9b, type: 3}
 --- !u!65 &8101328171697177109
 BoxCollider:
   m_ObjectHideFlags: 0

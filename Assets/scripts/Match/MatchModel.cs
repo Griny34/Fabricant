@@ -2,6 +2,12 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using WalletUser;
+using UpgradeSkills;
+using GameTime;
+using InterfaceInteraction;
+using AgavaServices;
+using System;
 
 public class MatchModel : MonoBehaviour
 {
@@ -26,41 +32,32 @@ public class MatchModel : MonoBehaviour
     [SerializeField] private ImprovmentWareHouse _improvmentWareHouse;
     [SerializeField] private ImprovmentWareHouse _improvmentWareHouse2;
     [SerializeField] private Upgrade _upgrade;
+    [SerializeField] private Wallet _wallet;
 
     [Header("Events")]
-    [SerializeField] private UnityEvent onFinishing;
-    [SerializeField] private UnityEvent onFinished;
-    [SerializeField] public UnityEvent OnMatchChanged;
-    [SerializeField] private UnityEvent onWin;
+    //[SerializeField] private UnityEvent onFinishing;
+    //[SerializeField] private UnityEvent onWin;
+
+    [SerializeField] private GameObject _windoweEndMatch;
+    public event Action OnMatchChanged;
+    public event Action OnFinished;
+
 
     private int _currentMatchIndex;
 
-    public event UnityAction OnFinishing
-    {
-        add => onFinishing?.AddListener(value);
-        remove => onFinishing?.RemoveListener(value);
-    }
+    //public event UnityAction OnFinishing
+    //{
+    //    add => onFinishing?.AddListener(value);
+    //    remove => onFinishing?.RemoveListener(value);
+    //}
 
-    public event UnityAction OnFinished
-    {
-        add => onFinished?.AddListener(value);
-        remove => onFinished?.RemoveListener(value);
-    }
-
-    public static MatchModel Instace { get; private set; }
+    //public event UnityAction OnFinished
+    //{
+    //    add => onFinished?.AddListener(value);
+    //    remove => onFinished?.RemoveListener(value);
+    //}
 
     public MatchModelSO CurrentMatch => _allMatch[_currentMatchIndex];
-
-    private void Awake()
-    {
-        if (Instace != null)
-        {
-            Destroy(Instace);
-            return;
-        }
-
-        Instace = this;
-    }
 
     private void Start()
     {
@@ -84,9 +81,9 @@ public class MatchModel : MonoBehaviour
 
     private void StartNextLevel()
     {
-        Wallet.Instance.RestartSalary();
+        _wallet.RestartSalary();
         
-        _mini.SetPlayerScor(Wallet.Instance.GetMoney());
+        _mini.SetPlayerScor(_wallet.GetMoney());
 
         SaveGame();
 
@@ -104,8 +101,8 @@ public class MatchModel : MonoBehaviour
 
     public void ExitMenu()
     {
-        Wallet.Instance.RestartSalary();
-        _mini.SetPlayerScor(Wallet.Instance.GetMoney());
+        _wallet.RestartSalary();
+        _mini.SetPlayerScor(_wallet.GetMoney());
         SaveGame();
         SceneManager.LoadScene(1);
     }
@@ -113,17 +110,18 @@ public class MatchModel : MonoBehaviour
     private void FinishMatch()
     {
         Time.timeScale = 0;
-        onFinishing?.Invoke();
+        //onFinishing?.Invoke();
 
         StartCoroutine(Utils.MakeActionDelay(0f, () =>
         {
-            onFinished?.Invoke();
+            _windoweEndMatch.gameObject.SetActive(true);
+            OnFinished?.Invoke();
         }));
     }
     
     private void SaveGame()
     {
-        Wallet.Instance.SaveMoney();
+        _wallet.SaveMoney();
 
         _improvmentSpawnerChair.SaveValueCounter();
         _improvmentSpawnerArmChair.SaveValueCounter();
@@ -142,6 +140,7 @@ public class MatchModel : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
 
+        StartNextMatch();
         OnMatchChanged?.Invoke();
     }
 }

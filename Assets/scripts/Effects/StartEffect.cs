@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Factory;
 
 public class StartEffect : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _particleSystem;
-    [SerializeField] private SpawnerFurniture _spawnerChair;
+    [SerializeField] private EasyFactory _spawnerChair;
 
     private void OnEnable()
     {

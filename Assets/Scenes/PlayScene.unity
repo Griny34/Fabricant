@@ -235,11 +235,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerHandler: {fileID: 1310585690}
   _delayStartAction: 2
-  _speedBay: 0.005
   _valueBay: 1
   _priseOpen: 500
   _valueOnText: {fileID: 580453391}
   _text: {fileID: 973004633}
+  _wallet: {fileID: 2089539522}
   _order: {fileID: 2039668779039249750, guid: b4faa4d8be7eccf40bff3ad7c5d834bc, type: 3}
   _keyPrefsCount: Table
   _keyPrefsBool: BoolTable
@@ -1117,11 +1117,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerHandler: {fileID: 662218027}
   _delayStartAction: 2
-  _speedBay: 0.001
   _valueBay: 1
   _priseOpen: 1000
   _valueOnText: {fileID: 1667572891}
   _text: {fileID: 992996498}
+  _wallet: {fileID: 0}
   _image: {fileID: 819491946}
   _order: {fileID: 1716072781005726921, guid: 680a018362cde9d40a34c32c8c5db3b0, type: 3}
   _improvement: {fileID: 1408654915}
@@ -2696,6 +2696,8 @@ MonoBehaviour:
   _speedRotation: 15
   _acceleration: 0.2
   _deceleration: 0.5
+  _upgrade: {fileID: 1123694174}
+  _matchModel: {fileID: 1041038827}
 --- !u!95 &145607014 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 4ef30153f8c250c41a44ca6020e8c399, type: 3}
@@ -2767,6 +2769,7 @@ MonoBehaviour:
   _pointStartStack: {fileID: 693811583}
   _maxCountDesk: 0
   _countDeskForCreatChair: 3
+  _upgrade: {fileID: 1123694174}
 --- !u!114 &145607022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2780,6 +2783,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pointStartStack: {fileID: 1812206961}
+--- !u!114 &145607023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 145607012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48daf5528113ad0468632b9ed18bd535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _money: {fileID: 1451012142}
+  _wallet: {fileID: 2089539522}
+  _particleSystem: {fileID: 1955112078}
 --- !u!1 &149302733
 GameObject:
   m_ObjectHideFlags: 0
@@ -3281,15 +3299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &185298464
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4060,11 +4069,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerHandler: {fileID: 807384776}
   _delayStartAction: 2
-  _speedBay: 0.008
   _valueBay: 1
   _priseOpen: 100
   _valueOnText: {fileID: 816130145}
   _text: {fileID: 1526131498}
+  _wallet: {fileID: 2089539522}
   _order: {fileID: 7290314962558875198, guid: a94dbb8f0ec6ea4499fb7e2ae443b60d, type: 3}
   _keyPrefsCount: Double
   _keyPrefsBool: BoolDouble
@@ -4803,15 +4812,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &275442153
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5961,7 +5961,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particleSystem: {fileID: 2040200859}
-  _spawnerChair: {fileID: 625682968}
+  _spawnerChair: {fileID: 625682972}
 --- !u!1 &344365506
 GameObject:
   m_ObjectHideFlags: 0
@@ -6404,7 +6404,6 @@ MonoBehaviour:
   _rewardService: {fileID: 392051067}
   _triggerHandler: {fileID: 442618844}
   _spawnerMoney: {fileID: 392051069}
-  _delay: 2
   _delaySpawn: 0.3
   _priceViewing: 5
 --- !u!114 &392051069
@@ -7705,15 +7704,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &442618845
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7940,8 +7930,9 @@ GameObject:
   - component: {fileID: 444977785}
   - component: {fileID: 444977784}
   - component: {fileID: 444977783}
-  - component: {fileID: 444977787}
+  - component: {fileID: 444977789}
   - component: {fileID: 444977788}
+  - component: {fileID: 444977787}
   m_Layer: 0
   m_Name: ChairArea
   m_TagString: Untagged
@@ -7977,15 +7968,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &444977784
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8058,19 +8040,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 444977780}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d10a7c4e6921f674fb36573621702899, type: 3}
+  m_Script: {fileID: 11500000, guid: 07e7cd096d6cecb49842d387a0670abf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerHandler: {fileID: 1848649174}
-  _ariaSpawner: {fileID: 444977783}
-  _pointSpawner: {fileID: 335221422}
-  _prefabFurniture: {fileID: 8448765643950404917, guid: 175c61cae3e4a0a49b344015a93ef420, type: 3}
-  _stackMaterial: {fileID: 145607021}
-  _stackFurniture: {fileID: 145607022}
-  _countBoardsForCreate: 2
-  _countFurnitureForCreate: 1
-  _worker: {fileID: 1691927906}
-  _prefabBedside: {fileID: 8448765643950404917, guid: 175c61cae3e4a0a49b344015a93ef420, type: 3}
+  _factory: {fileID: 444977789}
+  _countMateriale: {fileID: 1548493328}
+  _countFurniture: {fileID: 1579074072}
 --- !u!114 &444977788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8080,12 +8055,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 444977780}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad9801c3640c7ce4cad9a502393a02bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 331a7184998aa36498ccc0b32419d39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stoolSpawner: {fileID: 444977787}
-  _countDesk: {fileID: 1579074072}
-  _countFurniture: {fileID: 1548493328}
+  _recipe: {fileID: 11400000, guid: 7b083ba487fc2a24d98b196027676395, type: 2}
+  _spawner: {fileID: 335221422}
+--- !u!114 &444977789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444977780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d84cbef8fe14149b526a0fa0da0ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnerFurniture: {fileID: 444977788}
+  _stackMaterial: {fileID: 145607021}
+  _stackFurniture: {fileID: 145607022}
+  _triggerHandler: {fileID: 1848649174}
+  _ariaSpawner: {fileID: 444977783}
+  _worker: {fileID: 1691927906}
 --- !u!4 &446495584 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1304091969100580449, guid: d781ae46347a15444b99831095718a8b, type: 3}
@@ -8138,15 +8130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &452313378
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9073,15 +9056,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &503671497
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10889,8 +10863,9 @@ GameObject:
   - component: {fileID: 625682967}
   - component: {fileID: 625682966}
   - component: {fileID: 625682965}
-  - component: {fileID: 625682968}
   - component: {fileID: 625682969}
+  - component: {fileID: 625682972}
+  - component: {fileID: 625682971}
   - component: {fileID: 625682970}
   m_Layer: 0
   m_Name: BedsideTableArea
@@ -10978,28 +10953,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625682962}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &625682968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 625682962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 450aa3d899c9df84bbc74843d2976086, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _triggerHandler: {fileID: 185298463}
-  _ariaSpawner: {fileID: 625682969}
-  _pointSpawner: {fileID: 1798102577}
-  _prefabFurniture: {fileID: 914891520422172959, guid: 70a8e3284ddaed04781b170cd76511b8, type: 3}
-  _stackMaterial: {fileID: 145607021}
-  _stackFurniture: {fileID: 145607022}
-  _countBoardsForCreate: 4
-  _countFurnitureForCreate: 0
-  _worker: {fileID: 588762858}
-  _bedsideTable: {fileID: 914891520422172959, guid: 70a8e3284ddaed04781b170cd76511b8, type: 3}
 --- !u!114 &625682969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11012,15 +10965,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &625682970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11030,11 +10974,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 625682962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f46ec6a5b3fc40142a1a85a3c264ad17, type: 3}
+  m_Script: {fileID: 11500000, guid: e227726ee260ce045ad129813b740654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stoolSpawner: {fileID: 625682968}
-  _countDesk: {fileID: 1612506566}
+  _factory: {fileID: 625682972}
+  _countMateriale: {fileID: 1612506566}
+--- !u!114 &625682971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625682962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 331a7184998aa36498ccc0b32419d39c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _recipe: {fileID: 11400000, guid: 14aa8c8fff40b6349a58af68eab9b04c, type: 2}
+  _spawner: {fileID: 1798102577}
+--- !u!114 &625682972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625682962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23eba31b7dc5a1a408703cdc47cc8672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnerFurniture: {fileID: 625682971}
+  _stackMaterial: {fileID: 145607021}
+  _stackFurniture: {fileID: 145607022}
+  _triggerHandler: {fileID: 185298463}
+  _ariaSpawner: {fileID: 625682969}
+  _worker: {fileID: 588762858}
 --- !u!1 &636264820
 GameObject:
   m_ObjectHideFlags: 0
@@ -11240,7 +11216,8 @@ GameObject:
   - component: {fileID: 658053807}
   - component: {fileID: 658053806}
   - component: {fileID: 658053805}
-  - component: {fileID: 658053804}
+  - component: {fileID: 658053811}
+  - component: {fileID: 658053810}
   - component: {fileID: 658053809}
   m_Layer: 0
   m_Name: DoubleBedsideTableArea (1)
@@ -11265,28 +11242,6 @@ Transform:
   m_Father: {fileID: 1055772343}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &658053804
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658053802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cecc45c07339c5b49a8a8506e99679b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _triggerHandler: {fileID: 807384776}
-  _ariaSpawner: {fileID: 658053805}
-  _pointSpawner: {fileID: 737053330}
-  _prefabFurniture: {fileID: -5369871951277237158, guid: 854e8c30fa891f2449965056a0712f02, type: 3}
-  _stackMaterial: {fileID: 145607021}
-  _stackFurniture: {fileID: 145607022}
-  _countBoardsForCreate: 0
-  _countFurnitureForCreate: 2
-  _worker: {fileID: 1970776903}
-  _prefabDoubleBedsideTable: {fileID: -5369871951277237158, guid: 854e8c30fa891f2449965056a0712f02, type: 3}
 --- !u!114 &658053805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11299,15 +11254,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &658053806
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11380,11 +11326,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 658053802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8e8c69bd252e5e4d80bd8e2446a86ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 331a7184998aa36498ccc0b32419d39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnerFurniture: {fileID: 658053804}
+  _recipe: {fileID: 11400000, guid: 13cc2504fc47f24409473cf46dcfc9c1, type: 2}
+  _spawner: {fileID: 737053330}
+--- !u!114 &658053810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658053802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1942d6c39598044c928782e15d8077a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _factory: {fileID: 658053811}
   _countFurniture: {fileID: 1669083433}
+--- !u!114 &658053811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658053802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af62a71c6d33d504183e1799cef91137, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnerFurniture: {fileID: 658053809}
+  _stackMaterial: {fileID: 145607021}
+  _stackFurniture: {fileID: 145607022}
+  _triggerHandler: {fileID: 807384776}
+  _ariaSpawner: {fileID: 658053805}
+  _worker: {fileID: 1970776903}
 --- !u!1 &662218025
 GameObject:
   m_ObjectHideFlags: 0
@@ -11432,15 +11410,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &662218028
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12932,6 +12901,75 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &770422386
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 145607015}
+    m_Modifications:
+    - target: {fileID: 190236, guid: 71d9c9b791c3d7c46a4886b30b11b968, type: 3}
+      propertyPath: m_Name
+      value: DollarbillBlast
+      objectReference: {fileID: 0}
+    - target: {fileID: 431664, guid: 71d9c9b791c3d7c46a4886b30b11b968, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 431664, guid: 71d9c9b791c3d7c46a4886b30b11b968, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 431664, guid: 71d9c9b791c3d7c46a4886b30b11b968, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.7000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 431664, guid: 71d9c9b791c3d7c46a4886b30b11b968, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.7000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 431664, guid: 71d9c9b791c3d7c46a4886b30b11b968, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431664, guid: 71d9c9b791c3d7c46a4886b30b11b968, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 431664, guid: 71d9c9b791c3d7c46a4886b30b11b968, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431664, guid: 71d9c9b791c3d7c46a4886b30b11b968, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431664, guid: 71d9c9b791c3d7c46a4886b30b11b968, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431664, guid: 71d9c9b791c3d7c46a4886b30b11b968, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 431664, guid: 71d9c9b791c3d7c46a4886b30b11b968, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 431664, guid: 71d9c9b791c3d7c46a4886b30b11b968, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 431664, guid: 71d9c9b791c3d7c46a4886b30b11b968, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431664, guid: 71d9c9b791c3d7c46a4886b30b11b968, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 71d9c9b791c3d7c46a4886b30b11b968, type: 3}
 --- !u!1 &771378347
 GameObject:
   m_ObjectHideFlags: 0
@@ -13183,15 +13221,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &807384777
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13382,11 +13411,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerHandler: {fileID: 1006452860}
   _delayStartAction: 2
-  _speedBay: 0.007
   _valueBay: 1
   _priseOpen: 250
   _valueOnText: {fileID: 1673256890}
   _text: {fileID: 1092439144}
+  _wallet: {fileID: 2089539522}
   _order: {fileID: 8686662921431152625, guid: aa7601592e85d6744b034f9fbaa9be6d, type: 3}
   _improvement: {fileID: 1354287679}
   _keyPrefsCount: Armchair
@@ -15266,15 +15295,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &911964227
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15366,8 +15386,9 @@ GameObject:
   - component: {fileID: 916052524}
   - component: {fileID: 916052523}
   - component: {fileID: 916052522}
-  - component: {fileID: 916052526}
+  - component: {fileID: 916052528}
   - component: {fileID: 916052527}
+  - component: {fileID: 916052526}
   m_Layer: 0
   m_Name: ArmChairArea
   m_TagString: Untagged
@@ -15403,15 +15424,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &916052523
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15484,19 +15496,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 916052519}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ec452589c6bb4c40abc51e8f4ec2678, type: 3}
+  m_Script: {fileID: 11500000, guid: d8d84cbef8fe14149b526a0fa0da0ee6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerHandler: {fileID: 1006452860}
-  _ariaSpawner: {fileID: 916052522}
-  _pointSpawner: {fileID: 1590410897}
-  _prefabFurniture: {fileID: 7119902271882517376, guid: a1d8062f2bb237e47a33a5971e35aa13, type: 3}
+  _spawnerFurniture: {fileID: 916052527}
   _stackMaterial: {fileID: 145607021}
   _stackFurniture: {fileID: 145607022}
-  _countBoardsForCreate: 2
-  _countFurnitureForCreate: 1
+  _triggerHandler: {fileID: 1006452860}
+  _ariaSpawner: {fileID: 916052522}
   _worker: {fileID: 1153960192}
-  _prefabArmchair: {fileID: 7119902271882517376, guid: a1d8062f2bb237e47a33a5971e35aa13, type: 3}
 --- !u!114 &916052527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15506,12 +15514,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 916052519}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad9801c3640c7ce4cad9a502393a02bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 331a7184998aa36498ccc0b32419d39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stoolSpawner: {fileID: 916052526}
-  _countDesk: {fileID: 2098188128}
-  _countFurniture: {fileID: 229312993}
+  _recipe: {fileID: 11400000, guid: 250f4f1caf848404884342c3c29d1e77, type: 2}
+  _spawner: {fileID: 1590410897}
+--- !u!114 &916052528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916052519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07e7cd096d6cecb49842d387a0670abf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _factory: {fileID: 916052526}
+  _countMateriale: {fileID: 229312993}
+  _countFurniture: {fileID: 2098188128}
 --- !u!1001 &922530840
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16626,15 +16648,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &1006452861
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17567,66 +17580,8 @@ MonoBehaviour:
   _improvmentWareHouse: {fileID: 1076839779}
   _improvmentWareHouse2: {fileID: 1608091384}
   _upgrade: {fileID: 1123694174}
-  onFinishing:
-    m_PersistentCalls:
-      m_Calls: []
-  onFinished:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1686919064}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  OnMatchChanged:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1041038827}
-        m_TargetAssemblyTypeName: MatchModel, Assembly-CSharp
-        m_MethodName: StartNextMatch
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onWin:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1276223578}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+  _wallet: {fileID: 2089539522}
+  _windoweEndMatch: {fileID: 1686919064}
 --- !u!114 &1041038828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17640,7 +17595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _matchModel: {fileID: 1041038827}
-  _playerProgress2: {fileID: 400085137}
+  _wallet: {fileID: 2089539522}
 --- !u!4 &1041038829
 Transform:
   m_ObjectHideFlags: 0
@@ -18635,15 +18590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &1076839776
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18721,11 +18667,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerHandler: {fileID: 1845363831}
   _delayStartAction: 2
-  _speedBay: 0.001
   _valueBay: 1
   _priseOpen: 100
   _valueOnText: {fileID: 2119574298}
   _text: {fileID: 471641971}
+  _wallet: {fileID: 0}
   _keyPrefsCount: wareHause
   _keyPrefsBool: wareHauseBool
 --- !u!1 &1092439144
@@ -19712,8 +19658,9 @@ GameObject:
   - component: {fileID: 1132006407}
   - component: {fileID: 1132006406}
   - component: {fileID: 1132006404}
-  - component: {fileID: 1132006409}
+  - component: {fileID: 1132006411}
   - component: {fileID: 1132006410}
+  - component: {fileID: 1132006409}
   m_Layer: 0
   m_Name: TableArea
   m_TagString: Untagged
@@ -19749,15 +19696,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &1132006406
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19830,19 +19768,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1132006402}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97d2e5ccf89adf74dbbbc0f0efe2d75c, type: 3}
+  m_Script: {fileID: 11500000, guid: e1942d6c39598044c928782e15d8077a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerHandler: {fileID: 1310585690}
-  _ariaSpawner: {fileID: 1132006404}
-  _pointSpawner: {fileID: 1766014150}
-  _prefabFurniture: {fileID: 5298508662611724313, guid: b8f9284994bd5f84dbc8ef62666c6a5d, type: 3}
-  _stackMaterial: {fileID: 145607021}
-  _stackFurniture: {fileID: 145607022}
-  _countBoardsForCreate: 0
-  _countFurnitureForCreate: 2
-  _worker: {fileID: 776095763}
-  _prefabTable: {fileID: 5298508662611724313, guid: b8f9284994bd5f84dbc8ef62666c6a5d, type: 3}
+  _factory: {fileID: 1132006411}
+  _countFurniture: {fileID: 217738351}
 --- !u!114 &1132006410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19852,11 +19782,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1132006402}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8e8c69bd252e5e4d80bd8e2446a86ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 331a7184998aa36498ccc0b32419d39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnerFurniture: {fileID: 1132006409}
-  _countFurniture: {fileID: 217738351}
+  _recipe: {fileID: 11400000, guid: 79a1091b36db6bc4bb91b3cd18346bff, type: 2}
+  _spawner: {fileID: 1766014150}
+--- !u!114 &1132006411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132006402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af62a71c6d33d504183e1799cef91137, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnerFurniture: {fileID: 1132006410}
+  _stackMaterial: {fileID: 145607021}
+  _stackFurniture: {fileID: 145607022}
+  _triggerHandler: {fileID: 1310585690}
+  _ariaSpawner: {fileID: 1132006404}
+  _worker: {fileID: 776095763}
 --- !u!1 &1134538087 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 96fbcc19fd7e9a04d8871220a7084055, type: 3}
@@ -20281,7 +20229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particleSystem: {fileID: 230070418}
-  _spawnerChair: {fileID: 1210240038}
+  _spawnerChair: {fileID: 1210240040}
 --- !u!1001 &1208812531
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20444,10 +20392,9 @@ GameObject:
   - component: {fileID: 1210240036}
   - component: {fileID: 1210240035}
   - component: {fileID: 1210240034}
-  - component: {fileID: 1210240038}
-  - component: {fileID: 1210240039}
   - component: {fileID: 1210240041}
   - component: {fileID: 1210240040}
+  - component: {fileID: 1210240042}
   m_Layer: 0
   m_Name: StoolArea
   m_TagString: Untagged
@@ -20483,15 +20430,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &1210240035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20555,42 +20493,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210240032}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1210240038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210240032}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a0099b0bb9fa064197a7050401de37d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _triggerHandler: {fileID: 911964226}
-  _ariaSpawner: {fileID: 1210240034}
-  _pointSpawner: {fileID: 1291842753}
-  _prefabFurniture: {fileID: 0}
-  _stackMaterial: {fileID: 145607021}
-  _stackFurniture: {fileID: 145607022}
-  _countBoardsForCreate: 3
-  _countFurnitureForCreate: 1
-  _worker: {fileID: 1228533700}
-  _stool: {fileID: 1354491132872772486, guid: 4e41b766eeb5e614f93535a52b41df49, type: 3}
---- !u!114 &1210240039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1210240032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f46ec6a5b3fc40142a1a85a3c264ad17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stoolSpawner: {fileID: 1210240038}
-  _countDesk: {fileID: 1503929992}
 --- !u!114 &1210240040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20609,7 +20511,6 @@ MonoBehaviour:
   _triggerHandler: {fileID: 911964226}
   _ariaSpawner: {fileID: 1210240034}
   _worker: {fileID: 1228533700}
-  _timeAnimation: 3
 --- !u!114 &1210240041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20623,6 +20524,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _recipe: {fileID: 11400000, guid: 679e49b50e25d0341be9879fd3a73d42, type: 2}
+  _spawner: {fileID: 1291842753}
+--- !u!114 &1210240042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210240032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e227726ee260ce045ad129813b740654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _factory: {fileID: 1210240040}
+  _countMateriale: {fileID: 1503929992}
 --- !u!1 &1227462668
 GameObject:
   m_ObjectHideFlags: 0
@@ -20670,15 +20586,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &1227462671
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22287,15 +22194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &1310585691
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23210,11 +23108,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerHandler: {fileID: 1559063325}
   _delayStartAction: 2
-  _speedBay: 0.005
   _valueBay: 1
   _priseOpen: 500
   _valueOnText: {fileID: 1038188784}
   _text: {fileID: 2003450407}
+  _wallet: {fileID: 0}
   _image: {fileID: 1934631895}
   _order: {fileID: 8686662921431152625, guid: aa7601592e85d6744b034f9fbaa9be6d, type: 3}
   _improvement: {fileID: 813107574}
@@ -23821,11 +23719,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerHandler: {fileID: 1227462670}
   _delayStartAction: 2
-  _speedBay: 0.001
   _valueBay: 1
   _priseOpen: 1000
   _valueOnText: {fileID: 1834613694}
   _text: {fileID: 1948766616}
+  _wallet: {fileID: 2089539522}
   _order: {fileID: 1716072781005726921, guid: 680a018362cde9d40a34c32c8c5db3b0, type: 3}
   _improvement: {fileID: 52899552}
   _keyPrefsCount: OnWheel
@@ -24398,15 +24296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &1449489275
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24501,6 +24390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _value: 10
   _upgradeMoney: 5
+  _upgrade: {fileID: 1123694174}
 --- !u!4 &1451012143
 Transform:
   m_ObjectHideFlags: 0
@@ -25614,15 +25504,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &1559063326
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26392,15 +26273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &1608091381
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26478,11 +26350,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerHandler: {fileID: 2028552483}
   _delayStartAction: 2
-  _speedBay: 0.001
   _valueBay: 1
   _priseOpen: 200
   _valueOnText: {fileID: 1336267296}
   _text: {fileID: 1639506165}
+  _wallet: {fileID: 0}
   _keyPrefsCount: wareHause2
   _keyPrefsBool: wareHauseBool2
 --- !u!1 &1612506564
@@ -27203,15 +27075,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1648495459
 GameObject:
   m_ObjectHideFlags: 0
@@ -29425,11 +29288,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _triggerHandler: {fileID: 1848649174}
   _delayStartAction: 2
-  _speedBay: 0.01
   _valueBay: 1
   _priseOpen: 50
   _valueOnText: {fileID: 1016460273}
   _text: {fileID: 1902435535}
+  _wallet: {fileID: 2089539522}
   _order: {fileID: -328019904034379818, guid: 2e076639e0b0cee4ea975150e731340b, type: 3}
   _keyPrefsCount: Chair
   _keyPrefsBool: BoolChair
@@ -30770,15 +30633,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &1845363832
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30980,15 +30834,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &1848649175
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31494,15 +31339,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &1875217729
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32366,6 +32202,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1953951083}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!198 &1955112078 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19813282, guid: 71d9c9b791c3d7c46a4886b30b11b968, type: 3}
+  m_PrefabInstance: {fileID: 770422386}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1956141977
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33470,6 +33311,7 @@ MonoBehaviour:
   _timer: {fileID: 159934359}
   _image: {fileID: 495227787}
   _speed: 50
+  _matchModel: {fileID: 1041038827}
 --- !u!4 &2018233463
 Transform:
   m_ObjectHideFlags: 0
@@ -33600,15 +33442,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &2028552484
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34269,8 +34102,9 @@ GameObject:
   - component: {fileID: 2061946866}
   - component: {fileID: 2061946865}
   - component: {fileID: 2061946864}
-  - component: {fileID: 2061946868}
+  - component: {fileID: 2061946870}
   - component: {fileID: 2061946869}
+  - component: {fileID: 2061946868}
   m_Layer: 0
   m_Name: ChairOnWheelArea
   m_TagString: Untagged
@@ -34306,15 +34140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97563dae0136ce54da1f38e72e4f19d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  onStay:
-    m_PersistentCalls:
-      m_Calls: []
-  onExit:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!65 &2061946865
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34387,19 +34212,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2061946861}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fb7108486c1a8345803fd9bf5c4253b, type: 3}
+  m_Script: {fileID: 11500000, guid: 331a7184998aa36498ccc0b32419d39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _triggerHandler: {fileID: 1227462670}
-  _ariaSpawner: {fileID: 2061946864}
-  _pointSpawner: {fileID: 745946927}
-  _prefabFurniture: {fileID: 2798135748590348367, guid: fc5f6b42dc90e424ab8251467007e66b, type: 3}
-  _stackMaterial: {fileID: 145607021}
-  _stackFurniture: {fileID: 145607022}
-  _countBoardsForCreate: 5
-  _countFurnitureForCreate: 1
-  _worker: {fileID: 2008047980}
-  _prefabChairOnWheels: {fileID: 2798135748590348367, guid: fc5f6b42dc90e424ab8251467007e66b, type: 3}
+  _recipe: {fileID: 11400000, guid: 8e84b68a6c88e1d49a920ba514462f1f, type: 2}
+  _spawner: {fileID: 745946927}
 --- !u!114 &2061946869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34409,12 +34226,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 2061946861}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad9801c3640c7ce4cad9a502393a02bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 07e7cd096d6cecb49842d387a0670abf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stoolSpawner: {fileID: 2061946868}
-  _countDesk: {fileID: 750067267}
-  _countFurniture: {fileID: 499038214}
+  _factory: {fileID: 2061946870}
+  _countMateriale: {fileID: 499038214}
+  _countFurniture: {fileID: 750067267}
+--- !u!114 &2061946870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061946861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d84cbef8fe14149b526a0fa0da0ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawnerFurniture: {fileID: 2061946868}
+  _stackMaterial: {fileID: 145607021}
+  _stackFurniture: {fileID: 145607022}
+  _triggerHandler: {fileID: 1227462670}
+  _ariaSpawner: {fileID: 2061946864}
+  _worker: {fileID: 2008047980}
 --- !u!1 &2065071949
 GameObject:
   m_ObjectHideFlags: 0

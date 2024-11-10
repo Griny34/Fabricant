@@ -1,87 +1,77 @@
 using System;
 using UnityEngine;
 
-public class Wallet : MonoBehaviour
+namespace WalletUser
 {
-    [SerializeField] private int _money;
-
-    private int _salary = 0;
-    private int _counter = 0;
-
-    public event Action<int> OnMoneyChanged;
-    public event Action<int> OnSalaryChanged;
-
-    public static Wallet Instance { get; private set; }
-
-    private void Awake()
+    public class Wallet : MonoBehaviour
     {
-        if (Instance)
+        private const string _hashMoneyKey = "Money";
+
+        [SerializeField] private int _money;
+
+        private int _salary = 0;
+        private int _counter = 0;
+
+        public event Action<int> OnMoneyChanged;
+        public event Action<int> OnSalaryChanged;
+
+        private void Start()
         {
-            Destroy(gameObject);
-            return;
+            LoadMoney();
         }
 
-        Instance = this;
-    }
+        public int GetSalary()
+        {
+            return _salary;
+        }
 
-    private void Start()
-    {
-        LoadMoney();
-    }
+        public void TakeSalary(int money)
+        {
+            _salary += money;
 
-    public int GetSalary()
-    {
-        return _salary;
-    }
+            OnSalaryChanged?.Invoke(money);
+        }
 
-    public void TakeSalary(int money)
-    {
-        _salary += money;
+        public void RestartSalary()
+        {
+            _salary = 0;
 
-        OnSalaryChanged?.Invoke(money);
-    }
+            OnSalaryChanged?.Invoke(0);
+        }
 
-    public void RestartSalary()
-    {
-        _salary = 0;
+        public int GetMoney()
+        {
+            OnSalaryChanged?.Invoke(_counter);
+            return _money;
+        }
 
-        OnSalaryChanged?.Invoke(0);
-    }
+        public void TakeMoney(int money)
+        {
+            _money += money;
 
-    public int GetMoney()
-    {
-        OnSalaryChanged?.Invoke(_counter);
-        return _money;
-    }
+            OnMoneyChanged?.Invoke(money);
+        }
 
-    public void TakeMoney(int money)
-    {
-        _money += money;
+        public void GiveMoney(int money)
+        {
+            _money -= money;
 
-        OnMoneyChanged?.Invoke(money);
-    }
+            OnMoneyChanged?.Invoke(money);
+        }
 
-    public void GiveMoney(int money)
-    {
-        _money -= money;
+        public void SaveMoney()
+        {
+            PlayerPrefs.SetInt(_hashMoneyKey, _money);
+        }
 
-        OnMoneyChanged?.Invoke(money);
-    }
+        public void LoadMoney()
+        {
+            if (PlayerPrefs.HasKey(_hashMoneyKey) == false)
+                return;
 
-    public void SaveMoney()
-    {
-        PlayerPrefs.SetInt("Money", _money);
-    }
+            _money = PlayerPrefs.GetInt(_hashMoneyKey);
 
-    public void LoadMoney()
-    {
-        if (PlayerPrefs.HasKey("Money") == false)
-            return;
-
-        int money = PlayerPrefs.GetInt("Money");
-
-        _money = money;
-
-        OnMoneyChanged?.Invoke(money);
+            OnMoneyChanged?.Invoke(_money);
+        }
     }
 }

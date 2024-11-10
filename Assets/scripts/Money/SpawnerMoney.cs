@@ -1,17 +1,21 @@
 using UnityEngine;
 
-public class SpawnerMoney : MonoBehaviour
+namespace Currency
 {
-    [SerializeField] private BoxMoney _prefabMoney;
-    [SerializeField] private Transform _positionSpawner;
-
-    public void CreateMoney()
+    public class SpawnerMoney : MonoBehaviour
     {
-        float randomX = Random.Range(-1f, 1f);
-        float randomZ = Random.Range(-1f, 1f);
+        [SerializeField] private BoxMoney _prefabMoney;
+        [SerializeField] private Transform _positionSpawner;
 
-        Vector3 randomPosition = _positionSpawner.position + new Vector3(randomX, _positionSpawner.position.y, randomZ);
 
-        Instantiate(_prefabMoney, randomPosition, Quaternion.identity);
+        public void CreateMoney()
+        {
+            float randomX = Random.Range(-1f, 1f);
+            float randomZ = Random.Range(-1f, 1f);
+
+            Vector3 randomPosition = _positionSpawner.position + new Vector3(randomX, _positionSpawner.position.y, randomZ);
+
+            Instantiate(_prefabMoney, randomPosition, Quaternion.identity);
+        }
     }
 }

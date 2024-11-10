@@ -1,23 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchCanvas : SwitchCanvasMenu
+namespace InterfaceInteraction
 {
-    [SerializeField] private GameObject _portraitOrders;
-    [SerializeField] private GameObject _landscapeOrders;
-
-    protected override void SwitchVerticalView()
+    public class SwitchCanvas : SwitchCanvasMenu
     {
-        _portraitOrders.SetActive(true);
+        [SerializeField] private GameObject _portraitOrders;
+        [SerializeField] private GameObject _landscapeOrders;
 
-        _landscapeOrders.SetActive(false);
-    }
+        protected override void SwitchVerticalView()
+        {
+            _portraitOrders.SetActive(true);
 
-    protected override void SwitchHorizontalView()
-    {
-        _portraitOrders.SetActive(false);
+            _landscapeOrders.SetActive(false);
+        }
 
-        _landscapeOrders.SetActive(true);
+        protected override void SwitchHorizontalView()
+        {
+            _portraitOrders.SetActive(false);
+
+            _landscapeOrders.SetActive(true);
+        }
     }
 }

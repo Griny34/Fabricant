@@ -2,56 +2,58 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class Timer : MonoBehaviour
+namespace GameTime
 {
-    private const float _delyeCoroutine = 1f;
-
-    private WaitForSeconds _timeCoroutine = new WaitForSeconds(_delyeCoroutine);
-    private int _timeLeft;
-    private IEnumerator _tickCoroutine;
-
-    public event Action OnStarted;
-    public event Action<int> OnTick;
-    public event Action OnDone;
-
-    public void StartTimer(int seconds)
+    public class Timer : MonoBehaviour
     {
-        _timeLeft = seconds;
+        private const float _delyeCoroutine = 1f;
+        private WaitForSeconds _timeCoroutine = new WaitForSeconds(_delyeCoroutine);
+        private int _timeLeft;
+        private IEnumerator _tickCoroutine;
 
-        if (_tickCoroutine != null)
+        public event Action OnStarted;
+        public event Action<int> OnTick;
+        public event Action OnDone;
+
+        public void StartTimer(int seconds)
         {
-            Stop();
+            _timeLeft = seconds;
+
+            if (_tickCoroutine != null)
+            {
+                Stop();
+            }
+
+            _tickCoroutine = TickCoroutine();
+            StartCoroutine(_tickCoroutine);
+            OnStarted?.Invoke();
         }
 
-        _tickCoroutine = TickCoroutine();
-        StartCoroutine(_tickCoroutine);
-        OnStarted?.Invoke();
-    }
-
-    public void Stop()
-    {
-        StopCoroutine(_tickCoroutine);
-    }
-
-    public float GetTimeLife()
-    {
-        return _timeLeft;
-    }
-
-    private IEnumerator TickCoroutine()
-    {
-        while (_timeLeft >= 1)
+        public void Stop()
         {
-            _timeLeft--;
-            OnTick?.Invoke(_timeLeft);
-            yield return _timeCoroutine;
+            StopCoroutine(_tickCoroutine);
         }
 
-        OnDone?.Invoke();
-    }
+        public float GetTimeLife()
+        {
+            return _timeLeft;
+        }
 
-    public void FinishShift()
-    {
-        _timeLeft = 1;
+        private IEnumerator TickCoroutine()
+        {
+            while (_timeLeft >= 1)
+            {
+                _timeLeft--;
+                OnTick?.Invoke(_timeLeft);
+                yield return _timeCoroutine;
+            }
+
+            OnDone?.Invoke();
+        }
+
+        public void FinishShift()
+        {
+            _timeLeft = 1;
+        }
     }
 }

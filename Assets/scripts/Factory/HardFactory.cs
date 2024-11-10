@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Gameplay.Common;
-
+using Player;
 
 namespace Factory
 {
@@ -36,6 +36,8 @@ namespace Factory
         private Coroutine _coroutineAnimation;
         private Coroutine _coroutine;
         private Coroutine _coroutineFurniture;
+
+        private Board _board;
 
         public event Action OnStartedEffect;
         public event Action OnChangedCount;
@@ -203,6 +205,20 @@ namespace Factory
                     _requiredMaterial = materiale;
                     return _requiredMaterial;
                 }              
+            }
+
+            return null;
+        }
+
+        private Board SearchhMateriale()
+        {
+            foreach (var materiale in _stackMaterial.GetListMaterial())
+            {
+                if (materiale is Board)
+                {
+                    _board = (Board)materiale;
+                    return _board;
+                }
             }
 
             return null;

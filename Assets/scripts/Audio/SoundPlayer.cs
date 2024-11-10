@@ -1,17 +1,23 @@
 using Plugins.Audio.Core;
 using UnityEngine;
 
-public class SoundPlayer : MonoBehaviour
+namespace SoundAccompaniment
 {
-    [SerializeField] private SourceAudio _sourceAudio;
-
-    public void ClickSoundButtonPlay()
+    public class SoundPlayer : MonoBehaviour
     {
-        _sourceAudio.PlayOneShot("Button");
-    }
+        private const string _button = "Button";
+        private const string _buttonNegation = "niht";
 
-    public void ClickSoundOther()
-    {
-        _sourceAudio.PlayOneShot("niht");
+        [SerializeField] private SourceAudio _sourceAudio;
+
+        public void ClickSoundButtonPlay()
+        {
+            _sourceAudio.PlayOneShot(_button);
+        }
+
+        public void ClickSoundOther()
+        {
+            _sourceAudio.PlayOneShot(_buttonNegation);
+        }
     }
 }

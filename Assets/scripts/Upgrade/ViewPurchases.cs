@@ -1,38 +1,43 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class ViewPurchases : MonoBehaviour
+namespace UpgradeSkills
 {
-    [SerializeField] private TextMeshProUGUI _textNumberAttemptsBuySpeed;
-    //[SerializeField] private TextMeshProUGUI _textNumberAttemptsBuyChair;
-    [SerializeField] private TextMeshProUGUI _textNumberAttemptsBuyMateriale;
-    [SerializeField] private TextMeshProUGUI _textNumberAttemptsBuyMoney;
-
-    [SerializeField] private Upgrade _upgrade;
-
-    private void Start()
+    public class ViewPurchases : MonoBehaviour
     {
-        _upgrade.OnBuySpeedPlayer += () =>
+        [SerializeField] private TextMeshProUGUI _textNumberAttemptsBuySpeed;
+        [SerializeField] private TextMeshProUGUI _textNumberAttemptsBuyMateriale;
+        [SerializeField] private TextMeshProUGUI _textNumberAttemptsBuyMoney;
+
+        [SerializeField] private Upgrade _upgrade;
+
+        private void OnEnable()
+        {
+            _upgrade.OnBuySpeedPlayer += ChangeTextSpeed;
+            _upgrade.OnBuyMoney += ChangeTextMoney;
+            _upgrade.OnBuyDeskInventory += ChangeTextMaterialStack;
+        }
+
+        private void OnDisable()
+        {
+            _upgrade.OnBuySpeedPlayer -= ChangeTextSpeed;
+            _upgrade.OnBuyMoney -= ChangeTextMoney;
+            _upgrade.OnBuyDeskInventory -= ChangeTextMaterialStack;
+        }
+
+        private void ChangeTextSpeed()
         {
             _textNumberAttemptsBuySpeed.text = _upgrade.CountPaySpeed.ToString();
-        };
+        }
 
-        //_upgrade.OnBuyChairInventory += () =>
-        //{
-        //    _textNumberAttemptsBuyChair.text = _upgrade.CountPayChair.ToString();
-        //};
-
-        _upgrade.OnBuyMoney += () =>
+        private void ChangeTextMoney()
         {
             _textNumberAttemptsBuyMoney.text = _upgrade.CountPayMoney.ToString();
-        };
+        }
 
-        _upgrade.OnBuyDeskInventory += () =>
+        private void ChangeTextMaterialStack()
         {
             _textNumberAttemptsBuyMateriale.text = _upgrade.CountPayDesk.ToString();
-        };
+        }
     }
 }
